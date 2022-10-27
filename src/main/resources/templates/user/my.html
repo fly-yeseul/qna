@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/commons.css}">
+    <link rel="stylesheet" th:href="@{/user/resources/my.css}">
+    <link rel="stylesheet" as="style" crossorigin
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css"/>
+    <script src="https://kit.fontawesome.com/e099593f60.js" crossorigin="anonymous"></script>
+    <title th:text="${userEntity.getName()} + '(@' + ${userEntity.getNickname()} + ') ・ Instagram'"></title>
+</head>
+<body>
+<th:block th:replace="~{fragments/header.html :: content}"></th:block>
+<div class="user-info">
+    <div class="user-photo">
+
+
+<!--        TODO 유저 사진 DB에서 불러와야함-->
+        <img alt="User-Image" th:src="@{/resources/images/userimage.png}" th:if="${userEntity.getProfile() == null}">
+        <img alt="my-page" th:src="@{'/user/profile' (uid=${userEntity.getNickname()})}" th:if="${userEntity.getProfile() != null}">
+    </div>
+    <div class="user-letters">
+        <div class="user-summary">
+            <span class="user-nickname" th:text="${userEntity.getNickname()}"></span>
+            <a class="edit-profile" th:href="@{/user/edit}">
+                <span>프로필 편집</span>
+            </a>
+        </div>
+
+        <div class="user-count">
+
+
+            <!--        TODO 숫자 세 자리 마다 반점찍는거 해야함-->
+
+
+            <div class="counts">
+                <span>게시물</span>
+                <span class="number" th:text="${#numbers.formatInteger(postCount, 3, 'COMMA')}"></span>
+            </div>
+
+            <div class="counts">
+                <span>팔로워</span>
+
+
+                <!--            TODO 팔로워 뷰잉 페이지 만들어야함-->
+
+
+                <a class="number" th:href="@{/}">9,999</a>
+            </div>
+            <div class="counts">
+                <span>팔로잉</span>
+
+
+                <!--            TODO 팔로잉 뷰잉 페이지 만들어야함-->
+
+
+                <a class="number" th:href="@{/}">9,999</a>
+            </div>
+        </div>
+
+        <div class="user-detail">
+            <span class="user-name" th:text="${userEntity.getName()}"></span>
+            <span class="user-intro" th:text="${userEntity.getIntro()}"></span>
+        </div>
+    </div>
+
+</div>
+
+<div class="line"></div>
+
+<section class="user-posts">
+    <div class="posts" th:each="post : ${postEntities}" th:with="dt = ${#dates.createNow()}">
+        <a th:href="@{'/post/detail/' + ${post.getIndex()}}">
+            <img th:src="@{'/post/image' (pid=${post.getIndex()})}">
+        </a>
+    </div>
+</section>
+
+
+</body>
+</html>

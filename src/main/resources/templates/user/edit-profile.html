@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/commons.css}">
+    <link rel="stylesheet" th:href="@{/user/resources/edit-profile.css}">
+    <link rel="stylesheet" as="style" crossorigin
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css"/>
+    <script src="https://kit.fontawesome.com/e099593f60.js" crossorigin="anonymous"></script>
+
+    <script defer th:src="@{/user/scripts/edit-profile.js}"></script>
+    <script th:if="${userEntity == null}">
+        alert('로그인이 필요한 서비스입니다.');
+        window.history.back();
+    </script>
+    <title>프로필 사진 변경 ・ Instagram</title>
+</head>
+<body>
+<th:block th:replace="~{fragments/header.html :: content}"></th:block>
+<form class="cover" method="post" enctype="multipart/form-data">
+    <div class="edit-photo">
+        <span>프로필 사진 변경</span>
+        <label class="input-profile">
+            <span class="hint" hidden>사진</span>
+            <a class="profile" for="input-profile" th:if="${userEntity.getProfile() != null}">
+                <img th:src="${userEntity.getProfile()}">
+            </a>
+            <span class="guide" th:if = "${userEntity.getProfile() == null}">사진을 업로드하세요.</span>
+            <label class="button-blue" for="input-profile"
+            th:if = "${userEntity.getProfile() == null}">컴퓨터에서 선택</label>
+            <Input class="button" name="profile" id="input-profile" type="file" accept="image/png, image/jpeg">
+        </label>
+    </div>
+    <div class="line"></div>
+    <div class="function-buttons">
+        <div class="submit-button">
+            <input class="button" type="submit" value="저장하기">
+        </div>
+        <div class="line"></div>
+        <div class="delete-profile">
+            <span>현재 사진 삭제</span>
+        </div>
+        <div class="line"></div>
+        <div class="cancel">
+            <a th:href="@{/user/edit}">취소</a>
+        </div>
+    </div>
+</form>
+
+
+</body>
+</html>

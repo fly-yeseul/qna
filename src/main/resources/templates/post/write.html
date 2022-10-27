@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/commons.css}">
+    <link rel="stylesheet" th:href="@{/post/resources/stylesheets/write.css}">
+    <link rel="stylesheet" as="style" crossorigin
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css"/>
+    <script src="https://kit.fontawesome.com/e099593f60.js" crossorigin="anonymous"></script>
+    <script defer th:src="@{/post/resources/scripts/write.js}"></script>
+    <script th:if="${userEntity == null}">
+        window.location.href = '/user/login';
+    </script>
+    <title>새 게시물 만들기 ・ Instagram</title>
+</head>
+<body>
+<!--th:if="${userEntity != null}"-->
+<th:block th:replace="~{fragments/header.html :: content}"></th:block>
+<form class="post-form" method="post" enctype="multipart/form-data">
+    <div class="title">
+        <i class="icon fa-solid fa-arrow-left"></i>
+        <span class="title">새 게시물 만들기</span>
+        <input class="button" type="submit" value="공유하기">
+    </div>
+    <div class="input-container">
+        <div class="image-container">
+            <label class="input-image" >
+                <span class="hint" hidden>사진</span>
+                <i class="icon fa-regular fa-image"></i>
+                <span class="guide">사진을 업로드 하세요.</span>
+                <label class="button-blue" for="input-image">컴퓨터에서 선택</label>
+                <input class="button" name="photo" id="input-image" type="file" accept="image/png, image/jpeg" >
+            </label>
+        </div>
+        <div class="content-container">
+            <label class="content-label">
+                <div class="user-info">
+
+                    <img alt="user" th:src="@{/resources/images/userimage.png}" th:if="${userEntity.getProfile() == null}">
+                    <img alt="my-page" th:src="${userEntity.getProfile()}" th:if="${userEntity.getProfile() != null}">
+                    <span class="user-name" th:text="${userEntity.getNickname()}"></span>
+                </div>
+                <div class="input-content">
+                    <textarea class="content" name="content" aria-label="문구 입력..." placeholder="문구 입력..." autocomplete="off" autocorrect="off"></textarea>
+                </div>
+                <div class="content-setting">
+                    <div class="setting-box">
+                        <span>고급설정</span>
+                        <i class="icon fa-solid fa-angle-down"></i>
+                    </div>
+                    <div class="setting">
+                        <div class="setting-check">
+                            <span class="guide">이 게시물의 좋아요 수 및 조회수 숨기기</span>
+                            <i class="icon fa-solid fa-angle-down"></i>
+                        </div>
+                        <input type="checkbox" id="viewCheck">
+                        <span class="detail-guide">이 게시물의 총 좋아요 및 조회수는 회원님만 볼 수 있습니다. 나중에 게시물 상단에 있는 ··· 메뉴에서 이 설정을 변경할 수 있습니다. 다른 사람의 게시물에서 좋아요 수를 숨기려면 계정 설정으로 이동하세요.</span>
+                    </div>
+                    <div class="setting">
+                        <div class="setting-check">
+                            <span class="guide">댓글 기능 해제</span>
+                            <i class="icon fa-solid fa-angle-down"></i>
+                        </div>
+                        <input type="checkbox" id="commentCheck">
+                        <span class="detail-guide">나중에 게시물 상단의 메뉴(···)에서 이 설정을 변경할 수 있습니다.</span>
+                    </div>
+                </div>
+            </label>
+        </div>
+    </div>
+</form>
+
+<!--TODO : 에러처리 해야함-->
+
+
+
+
+
+</body>
+</html>

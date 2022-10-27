@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- xml file 임을 알려주는겅 -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.fly_yeseul.qna.mappers.IPostMapper">
+    <insert id="insertPost"
+            parameterType="dev.fly_yeseul.qna.entities.post.PostEntity">
+        INSERT INTO `first_board`.`posts` (`user_email`, `user_nickname`, `photo_data`, `content`)
+        VALUES (#{userEmail}, #{userNickname}, #{photoData}, #{content})
+    </insert>
+
+    <select id="selectPost"
+            resultType="dev.fly_yeseul.qna.entities.post.PostEntity">
+        SELECT `index`         AS `index`,
+               `user_email`    AS `userEmail`,
+               `user_nickname` AS `userNickname`,
+               `photo_data`    AS `photoData`,
+               `content`       AS `content`,
+               `posted_at`     AS `postedAt`,
+               `likes`         AS `likes`
+        FROM `first_board`.`posts` AS `post`
+        ORDER BY `post`.`index` DESC
+    </select>
+
+    <select id="selectPostCountByEmail"
+            resultType="_int">
+        SELECT COUNT(0)
+        FROM `first_board`.`posts`
+        WHERE `user_email` = #{userEmail}
+    </select>
+
+</mapper>

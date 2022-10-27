@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/commons.css}">
+    <link rel="stylesheet" th:href="@{/user/resources/login.css}">
+    <link rel="stylesheet" as="style" crossorigin
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css"/>
+    <script src="https://kit.fontawesome.com/e099593f60.js" crossorigin="anonymous"></script>
+    <script th:if="${loginVo != null && loginVo.getResult().name().equals('FAILURE')}">
+        alert('아이디 혹은 비밀번호가 일치하지 않습니다.');
+        window.history.back();
+    </script>
+    <script th:if="${loginVo != null && loginVo.getResult().name().equals('SUCCESS')}">
+        window.location.href = '/';
+    </script>
+    <title>로그인 ・ Instagram</title>
+</head>
+<body>
+<div class="login-box">
+    <div class="logo-container">
+        <a class="logo" th:href="@{/}">
+            <img alt="instagram_logo"
+                 th:src="@{https://www.instagram.com/static/images/web/logged_out_wordmark-2x.png/d2529dbef8ed.png}">
+        </a>
+        <span class="guide">로그인하세요.</span>
+    </div>
+
+    <form class="register-form" action="/user/login" method="POST">
+        <label class="input-container">
+            <span hidden>이메일</span>
+            <input class="input" maxlength="50" name="email" placeholder="아이디(이메일)" type="email">
+        </label>
+        <label class="input-container">
+            <span hidden>비밀번호</span>
+            <input class="input" maxlength="50" name="password" placeholder="비밀번호" type="password">
+        </label>
+        <div class="sub">
+            <!--            <label class="autosign-container">-->
+            <!--                <input class="checkbox" name="autosign" type="checkbox">-->
+            <!--                <span class="checker">-->
+            <!--                <i class="icon fa-solid fa-check"></i>-->
+            <!--            </span>-->
+            <!--                <span class="text">자동로그인</span>-->
+            <!--            </label>-->
+            <label>
+                <a class="link" th:href="@{/user/recover}">비밀번호를 잊으셨나요?</a>
+            </label>
+        </div>
+        <input class="button login" type="submit" value="로그인">
+    </form>
+</div>
+
+<div class="reg">
+    <span>계정이 없으신가요?</span>
+    <a class="button register" th:href="@{/user/reg}">
+        <span>회원가입</span>
+    </a>
+</div>
+
+</body>
+</html>

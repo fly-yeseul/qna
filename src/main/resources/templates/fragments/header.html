@@ -1,0 +1,60 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+
+<header class="header" th:fragment="content">
+    <div class="login-bar">
+        <div class="logo-img">
+            <a class="logo" th:href="@{/}">
+                <img alt="instagram_logo"
+                     th:src="@{https://www.instagram.com/static/images/web/logged_out_wordmark-2x.png/d2529dbef8ed.png}">
+            </a>
+        </div>
+        <div class="search">
+            <i class="icon fa-solid fa-magnifying-glass"></i>
+            <input maxlength="50" name="keyword" type="text" placeholder="검색" autocomplete="off" autocorrect="off" autocapitalize="none">
+            <i class="iconX fa-solid fa-xmark"></i>
+        </div>
+        <div class="nav">
+            <ul class="list">
+                <li class="item">
+                    <a class="link" th:href="@{/user/login}" th:if="${userEntity == null}">
+                        <i class="icon fa-solid fa-arrow-right-to-bracket"></i>
+                    </a>
+                </li>
+                <li class="item">
+                    <a class="link" th:href="@{/post/write}" th:if="${userEntity != null}">
+                        <i class="icon fa-regular fa-square-plus"></i>
+                    </a>
+                </li>
+                <li class="item">
+                    <a class="link" th:href="@{/user/reg}" th:if="${userEntity == null}">
+                        <i class="icon fa-brands fa-instagram"></i>
+                    </a>
+                </li>
+                <li class="item">
+                    <a class="link"
+                       th:href="@{/user/my}"
+                       th:if="${userEntity != null}">
+                        <img alt="my-page" th:src="@{'/resources/images/userimage.png'}" th:if="${userEntity.getProfile() == null}">
+                        <img alt="my-page" th:src="@{'/user/profile' (uid=${userEntity.getNickname()})}" th:if="${userEntity.getProfile() != null}">
+                    </a>
+                </li>
+                <li class="item">
+                    <a class="link" th:href="@{/user/logout}" th:if="${userEntity != null}">
+                        <i class="icon fa-solid fa-arrow-right-from-bracket"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <!--    <div class="top-bar">-->
+    <!--        <ul class="board-list">-->
+    <!--            <li class="board">-->
+    <!--                <a class="link" th:href="@{/board/notice}">공지사항</a>-->
+    <!--            </li>-->
+    <!--        </ul>-->
+    <!--    </div>-->
+
+</header>
+</html>

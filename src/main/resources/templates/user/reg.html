@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/commons.css}">
+    <link rel="stylesheet" th:href="@{/user/resources/reg.css}">
+    <link rel="stylesheet" as="style" crossorigin
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css"/>
+    <script src="https://kit.fontawesome.com/e099593f60.js" crossorigin="anonymous"></script>
+    <title>회원가입 ・ Instagram</title>
+</head>
+<body>
+<div class="reg-box">
+    <div class="logo-container">
+        <a class="logo" th:href="@{/}">
+            <img alt="instagram_logo"
+                 th:src="@{https://www.instagram.com/static/images/web/logged_out_wordmark-2x.png/d2529dbef8ed.png}">
+        </a>
+        <span class="guide">친구들의 사진과 동영상을 보려면 가입하세요.</span>
+    </div>
+    <div class="line"></div>
+
+    <form class="register-form" method="post" enctype="multipart/form-data">
+        <label class="input-profile">
+            <span>프로필 사진</span>
+            <label class="blue-button" for="input-image">컴퓨터에서 선택</label>
+            <input class="button" name="photo" id="input-image" type="file" accept="image/png, image/jpeg" >
+        </label>
+        <label class="input-container">
+            <span hidden>이메일</span>
+            <input class="input" maxlength="50" name="email" placeholder="아이디(이메일)" type="email">
+        </label>
+        <label class="input-container">
+            <span hidden>비밀번호</span>
+            <input class="input" maxlength="50" name="password" placeholder="비밀번호" type="password">
+        </label>
+        <label class="input-container">
+            <span hidden>비밀번호 확인</span>
+            <input class="input" maxlength="50" name="password-check" placeholder="비밀번호 확인" type="password">
+        </label>
+        <label class="input-container">
+            <span hidden>이름</span>
+            <input class="input" maxlength="50" name="name" placeholder="이름" type="name">
+        </label>
+        <label class="input-container">
+            <span hidden>닉네임</span>
+           <input class="input" maxlength="12" name="nickname" placeholder="닉네임" type="text">
+        </label>
+
+        <input class="button login" type="submit" value="가입">
+        <div class="line"></div>
+    </form>
+</div>
+
+<div class="to-login">
+    <span>계정이 있으신가요?</span>
+    <a class="button login" th:href="@{/user/login}">
+        <span>로그인</span>
+    </a>
+</div>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- xml file 임을 알려주는겅 -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.fly_yeseul.qna.mappers.IUserMapper">
+    <insert id="insertUser"
+            parameterType="dev.fly_yeseul.qna.entities.member.UserEntity">
+        INSERT INTO `first_member`.`users` (`email`, `password`, `name`, `nickname`, `profile`)
+        VALUES (#{email}, #{password}, #{name}, #{nickname}, #{profile})
+    </insert>
+
+    <insert id="insertSession"
+            parameterType="dev.fly_yeseul.qna.entities.SessionEntity">
+        INSERT INTO `first_member`.`sessions`(`created_at`, `updated_at`, `expires_at`, `expired_flag`, `user_email`,
+                                              `key`, `ua`)
+        VALUES (#{createdAt}, #{updatedAt}, #{expiresAt}, #{isExpired}, #{userEmail}, #{key}, #{ua})
+    </insert>
+
+    <select id="selectSessionByKey"
+            parameterType="dev.fly_yeseul.qna.entities.SessionEntity"
+            resultType="dev.fly_yeseul.qna.entities.SessionEntity">
+        SELECT `created_at`   AS `createdAt`,
+               `updated_at`   AS `updatedAt`,
+               `expires_at`   AS `expiresAt`,
+               `expired_flag` AS `isExpired`,
+               `user_email`   AS `userEmail`,
+               `key`          AS `key`,
+               `ua`           AS `ua`
+        FROM `first_member`.`sessions`
+        WHERE `key` = #{key}
+          AND `expires_at` > NOW()
+          AND `expired_flag` = FALSE
+        LIMIT 1
+    </select>
+
+    <select id="selectUser"
+            parameterType="dev.fly_yeseul.qna.entities.member.UserEntity"
+            resultType="dev.fly_yeseul.qna.entities.member.UserEntity">
+        SELECT `email`    AS `email`,
+               `password` AS `password`,
+               `name`     AS `name`,
+               `nickname` AS `nickname`,
+               `intro`    AS `intro`,
+               `profile`  AS `profile`
+        FROM `first_member`.`users`
+        WHERE `email` = #{email}
+          AND `password` = #{password}
+        LIMIT 1
+    </select>
+
+    <select id="selectUserByEmail"
+            parameterType="dev.fly_yeseul.qna.entities.member.UserEntity"
+            resultType="dev.fly_yeseul.qna.entities.member.UserEntity">
+        SELECT `email`    AS `email`,
+               `password` AS `password`,
+               `name`     AS `name`,
+               `nickname` AS `nickname`,
+               `intro`    AS `intro`,
+               `profile`  AS `profile`
+        FROM `first_member`.`users`
+        WHERE `email` = #{email}
+        LIMIT 1
+    </select>
+
+    <select id="selectUserCountByEmail"
+            parameterType="dev.fly_yeseul.qna.entities.member.UserEntity"
+            resultType="_int">
+        SELECT COUNT(0)
+        FROM `first_member`.`users`
+        WHERE `email` = #{email}
+    </select>
+
+    <select id="selectProfile"
+            resultType="dev.fly_yeseul.qna.entities.member.UserEntity">
+        SELECT `profile`  AS `profile`,
+               `email`    AS `eamil`,
+               `name`     AS `name`,
+               `nickname` AS `nickname`,
+               `intro`    AS `intro`
+
+        FROM `first_member`.`users` AS `user`
+        WHERE `nickname` = #{nickname}
+    </select>
+
+    <update id="updateSession"
+            parameterType="dev.fly_yeseul.qna.entities.SessionEntity">
+        UPDATE `first_member`.`sessions`
+        SET `updated_at`   = #{updatedAt},
+            `expires_at`   = #{expiresAt},
+            `expired_flag` = #{isExpired}
+        WHERE `key` = #{key}
+        LIMIT 1
+    </update>
+
+    <update id="updateSessionExpiredByEmail"
+            parameterType="dev.fly_yeseul.qna.entities.SessionEntity">
+        UPDATE `first_member`.`sessions`
+        SET `expired_flag` = TRUE
+        WHERE `user_email` = #{email}
+          AND `expires_at` > NOW()
+          AND `expired_flag` = FALSE
+    </update>
+
+    <update id="updateProfilePhoto"
+            parameterType="dev.fly_yeseul.qna.entities.member.UserEntity">
+        UPDATE `first_member`.`users`
+        SET `profile` = #{profile}
+        WHERE `nickname` = #{nickname}
+        LIMIT 1
+    </update>
+
+</mapper>

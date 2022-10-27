@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+@import "header.css";
+@import "index.main.css";
+@import "static/user/resources/reg.css";
+@import "static/user/resources/login.css";
+@import "static/user/resources/my.css";
+@import "static/user/resources/edit.css";
+@import "static/user/resources/edit-profile.css";
+
+:root {
+    --content-max-width: 60rem;
+}
+
+html {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 300;
+}
+
+a:link, a:visited {
+    color: unset;
+    text-decoration: unset;
+}
+
+body {
+    background-color: #F5F6F7;
+    width: 100%;
+    min-height: 100%;
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+    justify-content: flex-start;
+    margin: unset;
+    position: absolute;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font: inherit;
+    margin-block: unset;
+    margin-inline: unset;
+}
+
+input, select {
+    width: 100%;
+    appearance: none;
+    background-color: unset;
+    border: unset;
+    border-image: unset;
+    box-sizing: border-box;
+    color: unset;
+    font: unset;
+    margin: unset;
+    outline: unset;
+    padding: unset;
+}
+
+ol, ul {
+    list-style-type: none;
+    margin-block: unset;
+    margin-inline: unset;
+    padding-inline: unset;
+}

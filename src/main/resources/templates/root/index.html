@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{resources/stylesheets/commons.css}">
+    <link rel="stylesheet" as="style" crossorigin
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css"/>
+    <script src="https://kit.fontawesome.com/e099593f60.js" crossorigin="anonymous"></script>
+    <title>Instagram</title>
+</head>
+<body>
+<th:block th:replace="~{fragments/header.html :: content}"></th:block>
+<main class="main">
+    <section class="left">
+        <div class="no-post" th:if="${postEntities == null}">
+            <i class="icon fa-regular fa-face-grimace fa-10x"></i>
+            <span>표시할 게시글이 없습니다.</span>
+        </div>
+        <section class="recent-post">
+            <div class="post" th:each="post : ${postEntities}" th:with="dt = ${#dates.createNow()}">
+                <div class="user-info">
+                    <a th:href="@{/}">
+                        <img alt="User-Image" class="user-image" th:src="@{/resources/images/userimage.png}" th:if="${userEntity.getProfile() == null}">
+                        <img alt="my-page" th:src="@{'/user/profile' (uid=${userEntity.getNickname()})}" th:if="${userEntity.getProfile() != null}">
+                        <span class="user-name" th:text="${post.getUserNickname()}"></span>
+                    </a>
+                </div>
+                <div class="post-photo">
+                    <a th:href="@{'/post/detail/' + ${post.getIndex()}}">
+                        <img alt="post" class="post-photo" th:src="@{'/post/image' (pid=${post.getIndex()})}">
+                    </a>
+                </div>
+                <div class="icons">
+                    <i class="heart fa-solid fa-heart"></i>
+                    <i class="icon fa-regular fa-comment"></i>
+                </div>
+                <div class="likes">
+                    <span>n명이 좋아합니다.</span>
+                </div>
+                <div class="content-container">
+                    <a class="poster" th:href="@{/}">
+                        <span th:text="${post.getUserNickname()}"></span>
+                    </a>
+                    <span th:text="${post.getContent()}"></span>
+                </div>
+                <a class="comment-view" th:href="@{/}">
+                    <span>댓글</span>
+                    <span>N</span>
+                    <span>개 모두 보기</span>
+                </a>
+                <form class="comment-container">
+                    <div class="one-comment">
+                        <a class="commenter">
+                            <span>댓글쓴사람</span>
+                        </a>
+                        <span>댓글내용</span>
+                    </div>
+                    <div class="comment-write">
+                        <input class="comment-input" type="text" placeholder="댓글 달기...">
+                        <input class="button" type="submit" value="게시">
+                    </div>
+                </form>
+            </div>
+        </section>
+    </section>
+    <aside class="right">
+        <div class="user-info">
+            <div class="img">
+                <a class="user-image" th:href="@{/user/my}">
+                    <img alt="User-Image" th:src="@{/resources/images/userimage.png}" th:if="${userEntity.getProfile() == null}">
+                    <img alt="my-page" th:src="@{'/user/profile' (uid=${userEntity.getNickname()})}" th:if="${userEntity.getProfile() != null}">
+                </a>
+            </div>
+            <div class="names">
+                <a th:href="@{/user/my}">
+                    <span class="user-nickname" th:text="${userEntity.getNickname()}"></span>
+                </a>
+                <span class="user-name" th:text="${userEntity.getName()}"></span>
+            </div>
+
+        </div>
+    </aside>
+</main>
+</body>
+</html>

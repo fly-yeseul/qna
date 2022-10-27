@@ -1,0 +1,219 @@
+@charset "UTF-8";
+
+
+body {
+    align-items: center;
+    background-color: #F5F6F7;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+body > .reg-box {
+    width: 20rem;
+    height: 30rem;
+    background-color: #ffffff;
+    border: 0.0625rem solid rgb(225, 225, 225);
+    padding: 2rem 2rem 1.75rem 2rem;
+}
+
+body > .reg-box > .logo-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 0.0625rem solid rgb(225, 225, 225);
+}
+
+body > .reg-box > .logo-container > .title {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+body > .reg-box > .logo-container > .logo > img {
+    height: 51px;
+}
+
+body > .reg-box > .logo-container > .guide {
+    color: dimgray;
+    font-size: 0.9rem;
+    margin: 0.75rem 0.75rem 0.25rem 0.75rem;
+}
+
+body > .reg-box > .register-form {
+    width: 20rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    margin-top: 1.25rem;
+}
+
+
+body > .reg-box > .register-form > .logo-container {
+    width: 20rem;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+body > .reg-box > .register-form > .logo-container > .logo {
+    height: 2.5rem;
+}
+
+body > .reg-box > .register-form > .guide {
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding-bottom: 1rem;
+}
+
+body > .reg-box > .register-form > .input-profile {
+    margin-bottom: 0.75rem;
+}
+
+body > .reg-box > .register-form > .input-profile > .blue-button {
+    width: 10rem;
+    height: 1.25rem;
+
+    cursor: pointer;
+    color: #0095f6;
+}
+
+body > .reg-box > .register-form > .input-profile > .button {
+    display: none;
+}
+
+body > .reg-box > .register-form > .input-container {
+    width: 20rem;
+    height: 36px;
+    align-items: stretch;
+    border: 0.0625rem solid rgb(203, 203, 203);
+    border-radius: 0.2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-bottom: 0.75rem;
+}
+
+body > .reg-box > .register-form > .input-container:focus-within {
+    border: 0.0625rem solid #3d3d3d;
+    outline: none;
+}
+
+/*body > .reg-box > .reg-box > .register-form > .input-container > .icon {*/
+/*    width: 3rem;*/
+/*    height: 2.75rem;*/
+/*    align-items: center;*/
+/*    background-color: rgb(249, 249, 249);*/
+/*    border-right: 0.0625rem solid rgb(203, 203, 203);*/
+/*    color: rgb(203, 203, 203);*/
+/*    font-size: 1.125rem;*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: center;*/
+/*}*/
+
+body > .reg-box > .register-form > .input-container > .input {
+    width: 20rem;
+    border: unset;
+    padding: 0 0.75rem 0 0.75rem;
+}
+
+body > .reg-box > .register-form > .input-container > .input:focus{
+    outline: none;
+}
+
+body > .reg-box > .register-form > .hidden-guide-red.visible {
+    color: red;
+    font-size: 0.8rem;
+    font-weight: 400;
+    padding-bottom: 0.9rem;
+    padding-left: 0.5rem;
+}
+
+body > .reg-box > .register-form > .hidden-guide.visible {
+    color: rgb(80, 80, 80);
+    font-size: 0.8rem;
+    font-weight: 300;
+    padding-bottom: 0.9rem;
+    padding-left: 0.5rem;
+}
+
+body > .reg-box > .register-form > .sub {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+
+body > .reg-box > .register-form > .sub > .link {
+    color: rgb(66, 132, 243);
+}
+
+body > .reg-box > .register-form > .button {
+    width: 20rem;
+    height: 30px;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 0.75rem;
+    /*padding: 0.75rem 0;*/
+    text-align: center;
+    user-select: none;
+}
+
+body > .reg-box > .register-form > .button.login {
+    background-color: #0095f6;
+    color: rgb(255, 255, 255);
+}
+
+body > .reg-box > .register-form > .button.login:hover {
+    filter: brightness(110%);
+}
+
+body > .reg-box > .register-form > .button.login:active {
+    filter: brightness(90%);
+}
+
+body > .reg-box > .register-form > .button.register {
+    border: 0.0625rem solid rgb(209, 209, 209);
+    color: rgb(66, 132, 243);
+}
+
+body > .reg-box > .register-form > .line {
+    border-top: 0.0625rem solid rgb(209, 209, 209);
+    margin-top: 0.75rem;
+}
+
+
+body > .to-login {
+    width: 20rem;
+    height: 47px;
+    background-color: white;
+    border: 0.0625rem solid rgb(225, 225, 225);
+    padding: 1.5rem 2rem 0 2rem;
+    margin-top: 0.75rem;
+    text-align: center;
+}
+
+body > .to-login > span {
+    color: #0e0e0e;
+}
+
+body > .to-login > .button.login {
+    width: 50px;
+    color: #0095f6;
+    font-weight: 600;
+    margin: 0;
+    padding: 0 0 0 0.5rem;
+}

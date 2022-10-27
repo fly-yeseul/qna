@@ -1,0 +1,114 @@
+@charset "UTF-8";
+
+body > .header {
+    width: 100%;
+    align-items: center;
+    background-color: #ffffff;
+    border-bottom: 0.0625rem solid rgb(225, 225, 225);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+body > .header > .login-bar {
+    width: var(--content-max-width);
+    /*align-items: center;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+body > .header > .login-bar > .logo-img {
+    margin: 0.25rem;
+}
+
+body > .header > .login-bar > .logo-img > .logo > img {
+    height: 29px;
+    padding-top: 0.625rem;
+}
+
+body > .header > .login-bar > .search {
+    width: 17.5rem;
+    height: 2.5rem;
+    align-items: center;
+    border-radius: 0.75rem;
+    display: flex;
+    font-size: 1rem;
+    font-weight: 100;
+    flex-direction: row;
+    color: #6f6f78;
+    background-color: #efefef;
+    justify-content: center;
+    margin-top: 0.3rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+body > .header > .login-bar > .search > .iconX {
+    display: none;
+}
+
+
+body > .header > .login-bar > .search > input {
+    padding-left: 0.75rem;
+}
+
+body > .header > .login-bar > .nav {
+    width: 10rem;
+    height: 50.5px;
+    justify-content: end;
+}
+
+body > .header > .login-bar > .nav > .list {
+    /*height: 39px;*/
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+    margin-top: 0.75rem;
+}
+
+body > header > .login-bar > .nav > .list > .item {
+    display: inline-block;
+
+}
+
+body > header > .login-bar > .nav > .list > .item > .link > .icon {
+    font-size: 1.375rem;
+    margin: 0 1.5rem 0 1.5rem;
+    padding: 0;
+}
+
+body > header > .login-bar > .nav > .list > .item > .link > img {
+    height: 25px;
+    border-radius: 100%;
+    border: 0.0625rem solid rgb(225, 225, 225);
+}
+
+/*body > .header > .login-bar > .list > .item + .item {*/
+/*    margin-left: 0.5rem;*/
+/*}*/
+
+
+body > .header > .top-bar > .board-list {
+    width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+body > .header > .top-bar > .board-list > .board {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 1rem;
+}
+
+body > .header > .top-bar > .board-list > .board:hover {
+    filter: drop-shadow(16px 16px 20px red) invert(75%);
+}
+
+

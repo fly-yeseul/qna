@@ -1,0 +1,141 @@
+@charset "UTF-8";
+
+
+.cover {
+    width: 31rem;
+    height: 50rem;
+
+    align-items: center;
+    background-color: rgba(255, 255, 255, 90%);
+    box-shadow: 0 0 0.35rem gray;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    margin: 1.5rem 0;
+
+}
+
+.cover > .edit-photo {
+    width: 30rem;
+    height: 33rem;
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cover > .edit-photo > span {
+    color: #000000;
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 1rem 0;
+}
+
+.cover > .edit-photo > .input-profile {
+    width: 30rem;
+    height: 30rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cover > .edit-photo > .input-profile > .profile {
+    width: 31rem;
+    height: 31rem;
+}
+
+.cover > .edit-photo > .input-profile > .profile > img {
+    width: 30rem;
+    height: 30rem;
+
+}
+
+.cover > .edit-photo > .input-profile > .guide {
+    color: #808080;
+    font-size: 1.5rem;
+    font-weight: 200;
+    margin: 1rem 0;
+}
+
+.cover > .edit-photo > .input-profile > .button-blue {
+    width: 7rem;
+    height: 1.75rem;
+    background-color: #0095f6;
+    border-radius: 0.25rem;
+    color: white;
+    text-align: center;
+    line-height: 1.75rem;
+}
+
+.cover > .edit-photo > .input-profile > .button {
+    display: none;
+}
+
+.cover > .line {
+    width: 27rem;
+    height: 0;
+    border-bottom: 0.0625rem solid rgb(225, 225, 225);
+    margin: 0.5rem;
+}
+
+.cover > .function-buttons {
+    align-items: center;
+    display: flex;
+    font-size: 1rem;
+    font-weight: 300;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cover > .function-buttons > .line {
+    width: 27rem;
+    height: 0;
+    border-bottom: 0.0625rem solid rgb(225, 225, 225);
+    margin: 0.5rem;
+}
+
+.cover > .function-buttons > .submit-button {
+    width: 31rem;
+    height: 4rem;
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cover > .function-buttons > .submit-button > .button {
+    color: #0095f6;
+    font-weight: 400;
+}
+
+.cover > .function-buttons > .delete-profile {
+    width: 31rem;
+    height: 4rem;
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cover > .function-buttons > .delete-profile > span {
+    color: #ED4956;
+    font-weight: 400;
+}
+
+.cover > .function-buttons > .cancel {
+    width: 31rem;
+    height: 4rem;
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cover > .function-buttons > .cancel > a {
+
+}

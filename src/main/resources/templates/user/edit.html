@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/commons.css}">
+    <link rel="stylesheet" th:href="@{/user/resources/edit.css}">
+    <link rel="stylesheet" as="style" crossorigin
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css"/>
+    <script src="https://kit.fontawesome.com/e099593f60.js" crossorigin="anonymous"></script>
+    <script defer th:src="@{/user/scripts/edit-profile.js}"></script>
+    <script th:if="${userEntity == null}">
+        alert('로그인이 필요한 서비스입니다.');
+        window.history.back();
+    </script>
+    <title>프로필 편집 ・ Instagram</title>
+</head>
+<body th:if="${userEntity != null}">
+<th:block th:replace="~{fragments/header.html :: content}"></th:block>
+
+<form class="edit-profile" method="post" enctype="multipart/form-data">
+    <div class="menu-area">
+        <div class="menu">
+            <a class="menu-name" id="edit-profile" th:href="@{/user/edit}">프로필 편집</a>
+        </div>
+        <div class="menu">
+            <a class="menu-name" th:href="@{/user/edit}">도움말</a>
+        </div>
+    </div>
+
+
+    <div class="edit-field">
+
+        <div class="edit-profilePhoto">
+            <img alt="profile-photo" th:src="@{/resources/images/userimage.png}" th:if="${userEntity.getProfile() == null}">
+            <img alt="my-page" th:src="@{'/user/profile' (pid=${userEntity.getEmail()})}" th:if="${userEntity.getProfile() != null}">
+            <div class="user-info">
+                <span class="user-nickname" th:text="${userEntity.getNickname()}"></span>
+                <a class="button edit" th:href="@{/user/edit-profile}"> 프로필 사진 바꾸기 </a>
+            </div>
+        </div>
+
+        <aside class="edit-title">
+            <span class="title">이름</span>
+            <div class="edit-contents">
+                <input name="name" type="text" th:value="${userEntity.getName()}">
+                <div class="guide">
+                    <span>사람들이 이름, 별명 또는 비즈니스 이름 등 회원님의 알려진 이름을 사용하여 회원님의 계정을 찾을 수 있도록 도와주세요.</span>
+                    <span>이름은 14일 안에 두 번만 변경할 수 있습니다.</span>
+                </div>
+            </div>
+        </aside>
+
+
+        <aside class="edit-title">
+            <span class="title">사용자 이름</span>
+            <div class="edit-contents">
+                <input name="nickname" type="text" th:value="${userEntity.getNickname()}">
+                <div class="guide">
+                    <span th:text="'대부분의 경우 이후 14일 동안 사용자 이름을 다시 ' + ${userEntity.getNickname()} + '(으)로 변경할 수 있습니다.'"></span>
+                </div>
+            </div>
+        </aside>
+
+        <aside class="edit-title">
+            <span class="title">소개</span>
+            <div class="edit-contents">
+                <textarea name="intro" type="text"  th:text="${userEntity.getIntro()}"></textarea>
+            </div>
+        </aside>
+
+        <div class="button">
+            <input class="button blue" type="submit" value="제출">
+        </div>
+    </div>
+
+<!--    modal 창 없애고 새로 업로드 창 만들기...쒯더뻑-->
+<!--    <div class="modal">-->
+<!--        <div class="modal-popup">-->
+<!--            <span>프로필 사진 바꾸기</span>-->
+<!--            <div class="modal-cell">-->
+<!--                <label class="button-profile" for="upload-profile">Upload Photo</label>-->
+<!--                <input name="profile" class="upload-profile-button" id="upload-profile" type="file" accept="image/png, image/jpeg">-->
+<!--            </div>-->
+<!--            <div class="modal-cell">-->
+<!--                <button class="delete-profile" name="deleteProfile" type="submit">현재 사진 삭제</button>-->
+<!--            </div>-->
+
+<!--            <div class="modal-cell">-->
+<!--                <button class="close-modal confirm">제출</button>-->
+<!--                <button class="close-modal">취소</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+</form>
+
+</body>
+
+</html>
