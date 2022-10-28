@@ -11,8 +11,9 @@
     </insert>
 
     <select id="selectCommentByIndex"
+            parameterType="dev.fly_yeseul.qna.entities.post.PostEntity"
             resultType="dev.fly_yeseul.qna.entities.post.CommentEntity">
-        SELECT `index`         AS `index`,
+        SELECT MAX(`index`)    AS `index`,
                `post_index`    AS `postIndex`,
                `user_email`    AS `userEmail`,
                `user_nickname` AS `userNickname`,
@@ -21,7 +22,6 @@
                `comment_likes` AS `commentLikes`
         FROM `first_board`.`comments` AS `comment`
         WHERE `post_index` = #{postIndex}
-        ORDER BY `comment`.`index` DESC
     </select>
 
 </mapper>

@@ -1,10 +1,14 @@
 const inputPostIndex = window.document.getElementById('postIndexInput');
+const postIndex = window.document.getElementById('postIndex')
 const comment = window.document.getElementById('comment')
+
+const formData = new formData();
+formData.append('postIndex', postIndex.value);
 
 inputProfile.addEventListener('click', () => {
     const xhr = new XMLHttpRequest()
     const formData = new FormData();
-    formData.append('comment', profile.value);
+    formData.append('comment', comment.value);
     xhr.open('POST', '');
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {

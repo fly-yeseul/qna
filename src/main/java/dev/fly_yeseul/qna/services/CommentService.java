@@ -28,7 +28,10 @@ public class CommentService {
         }
     }
 
-    public CommentEntity[] getComments(){
-        return this.commentMapper.selectCommentByIndex();
-    }
+    public CommentEntity[] getComment() {return this.commentMapper.selectCommentByIndex();}
+//    public CommentEntity getComment(
+//            int postIndex
+//    ){
+//        return this.commentMapper.selectCommentByIndex(postIndex);
+//    }
 }

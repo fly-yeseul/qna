@@ -51,14 +51,14 @@ public class RootController {
         }
         commentVo.setResult(null);
         commentVo.setPostIndex(postIndex);
-        System.out.println("포스트인덱스 불러옴");
+//        System.out.println("포스트인덱스 불러옴");
         commentVo.setUserEmail(userEntity.getEmail());
         commentVo.setUserNickname(userEntity.getNickname());
         commentVo.setCommentAt(new Date());
         commentVo.setCommentLikes(0);
         commentVo.setComment(comment);
         this.commentService.postComment(commentVo);
-        System.out.println("입력됨");
+//        System.out.println("입력됨");
 
         if(commentVo.getResult() == CommentResult.SUCCESS) {
             modelAndView.setViewName("redirect:/");
@@ -82,7 +82,7 @@ public class RootController {
         } else {
             PostEntity[] postEntities = this.postService.getPosts();
             UserEntity[] userEntities = this.userService.getProfiles();
-            CommentEntity[] commentEntities = this.commentService.getComments();
+            CommentEntity[] commentEntities = this.commentService.getComment();
             modelAndView.addObject("postEntities", postEntities);
             modelAndView.addObject("userEntities", userEntities);
             modelAndView.addObject("commentEntities", commentEntities);

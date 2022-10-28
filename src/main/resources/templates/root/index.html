@@ -9,7 +9,7 @@
     <link rel="stylesheet" as="style" crossorigin
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css"/>
     <script src="https://kit.fontawesome.com/e099593f60.js" crossorigin="anonymous"></script>
-    <script th:src="@{/post/resources/scripts/index.js}" defer></script>
+    <script th:src="@{/resources/scripts/index.js}" defer></script>
     <title>Instagram</title>
 </head>
 <body>
@@ -21,7 +21,10 @@
             <span>표시할 게시글이 없습니다.</span>
         </div>
         <section class="recent-post">
-            <form class="post" th:each="post : ${postEntities}" th:with="dt = ${#dates.createNow()}" method="post">
+            <form class="post"
+                  th:each="post : ${postEntities}"
+                  th:with="dt = ${#dates.createNow()}"
+                  method="post">
                 <div class="user-info">
                     <a th:href="@{/}">
                         <img alt="User-Image" class="user-image" th:src="@{/resources/images/userimage.png}" th:if="${userEntity.getProfile() == null}">
@@ -52,12 +55,12 @@
                     <span>N</span>
                     <span>개 모두 보기</span>
                 </a>
-                <div class="comments" th:each="comment : ${commentEntities}" th:with="dt = ${#dates.createNow()}">
+                <div class="comments">
                     <div class="one-comment">
                         <a class="commenter">
-                            <span th:text="${comment.getUserNickname()}"></span>
+                            <span th:text="${commentEntities.getUserNickname()}"></span>
                         </a>
-                        <span th:text="${comment.getComment()}"></span>
+                        <span th:text="${commentEntities.getComment()}"></span>
                     </div>
                 </div>
                 <div class="comment-container">

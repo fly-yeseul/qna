@@ -28,7 +28,7 @@ public class PostEntity {
         this.likes = likes;
     }
 
-    public int getIndex() {
+    public  int getIndex() {
         return index;
     }
 
