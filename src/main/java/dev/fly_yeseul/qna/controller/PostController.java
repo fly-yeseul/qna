@@ -70,6 +70,7 @@ public class PostController {
     }
 
 
+
     @RequestMapping(value = "write", method = RequestMethod.POST)
     public ModelAndView postWrite(
             @RequestAttribute(value = "userEntity", required = false) UserEntity userEntity,

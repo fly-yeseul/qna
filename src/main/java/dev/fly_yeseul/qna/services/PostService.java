@@ -4,10 +4,12 @@ package dev.fly_yeseul.qna.services;
 import dev.fly_yeseul.qna.entities.member.UserEntity;
 import dev.fly_yeseul.qna.entities.post.PhotoEntity;
 import dev.fly_yeseul.qna.entities.post.PostEntity;
+import dev.fly_yeseul.qna.enums.post.CommentResult;
 import dev.fly_yeseul.qna.enums.post.PostResult;
 import dev.fly_yeseul.qna.enums.post.ReadResult;
 import dev.fly_yeseul.qna.mappers.IPostMapper;
 import dev.fly_yeseul.qna.utils.CryptoUtil;
+import dev.fly_yeseul.qna.vos.post.CommentVo;
 import dev.fly_yeseul.qna.vos.post.PostVo;
 import dev.fly_yeseul.qna.vos.post.ReadVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,7 @@ public class PostService {
             postVo.setResult(PostResult.SUCCESS);
         }
     }
+
 
     public void postPhoto(
             MultipartFile multipartFile

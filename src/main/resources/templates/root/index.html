@@ -9,6 +9,7 @@
     <link rel="stylesheet" as="style" crossorigin
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css"/>
     <script src="https://kit.fontawesome.com/e099593f60.js" crossorigin="anonymous"></script>
+    <script th:src="@{/post/resources/scripts/index.js}" defer></script>
     <title>Instagram</title>
 </head>
 <body>
@@ -20,7 +21,7 @@
             <span>표시할 게시글이 없습니다.</span>
         </div>
         <section class="recent-post">
-            <div class="post" th:each="post : ${postEntities}" th:with="dt = ${#dates.createNow()}">
+            <form class="post" th:each="post : ${postEntities}" th:with="dt = ${#dates.createNow()}" method="post">
                 <div class="user-info">
                     <a th:href="@{/}">
                         <img alt="User-Image" class="user-image" th:src="@{/resources/images/userimage.png}" th:if="${userEntity.getProfile() == null}">
@@ -51,19 +52,22 @@
                     <span>N</span>
                     <span>개 모두 보기</span>
                 </a>
-                <form class="comment-container">
+                <div class="comments" th:each="comment : ${commentEntities}" th:with="dt = ${#dates.createNow()}">
                     <div class="one-comment">
                         <a class="commenter">
-                            <span>댓글쓴사람</span>
+                            <span th:text="${comment.getUserNickname()}"></span>
                         </a>
-                        <span>댓글내용</span>
+                        <span th:text="${comment.getComment()}"></span>
                     </div>
+                </div>
+                <div class="comment-container">
                     <div class="comment-write">
-                        <input class="comment-input" type="text" placeholder="댓글 달기...">
+                        <input id="postIndexInput" type="hidden" name="postIndex" th:value="${post.getIndex()}">
+                        <input name="comment" class="comment-input" type="text" placeholder="댓글 달기...">
                         <input class="button" type="submit" value="게시">
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </section>
     </section>
     <aside class="right">

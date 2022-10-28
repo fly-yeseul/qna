@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- xml file 임을 알려주는겅 -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.fly_yeseul.qna.mappers.ICommentMapper">
+    <insert id="insertComment"
+            parameterType="dev.fly_yeseul.qna.entities.post.CommentEntity">
+        INSERT INTO `first_board`.`comments`(`user_email`, `user_nickname`, `comment`, `post_index`)
+        VALUES (#{userEmail}, #{userNickname}, #{comment}, #{postIndex})
+    </insert>
+
+    <select id="selectCommentByIndex"
+            resultType="dev.fly_yeseul.qna.entities.post.CommentEntity">
+        SELECT `index`         AS `index`,
+               `post_index`    AS `postIndex`,
+               `user_email`    AS `userEmail`,
+               `user_nickname` AS `userNickname`,
+               `comment`       AS `comment`,
+               `comment_at`    AS `commentAt`,
+               `comment_likes` AS `commentLikes`
+        FROM `first_board`.`comments` AS `comment`
+        WHERE `post_index` = #{postIndex}
+        ORDER BY `comment`.`index` DESC
+    </select>
+
+</mapper>
