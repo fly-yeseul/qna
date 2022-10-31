@@ -1,5 +1,6 @@
 package dev.fly_yeseul.qna.services;
 
+import dev.fly_yeseul.qna.dtos.CommentDto;
 import dev.fly_yeseul.qna.entities.post.CommentEntity;
 import dev.fly_yeseul.qna.entities.post.PostEntity;
 import dev.fly_yeseul.qna.enums.post.CommentResult;
@@ -28,7 +29,11 @@ public class CommentService {
         }
     }
 
-    public CommentEntity[] getComment() {return this.commentMapper.selectCommentByIndex();}
+    public CommentEntity getComment(
+            PostEntity postEntity
+    ) {
+        return this.commentMapper.selectCommentByIndex(postEntity.getIndex());
+    }
 //    public CommentEntity getComment(
 //            int postIndex
 //    ){

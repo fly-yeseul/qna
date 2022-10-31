@@ -1,5 +1,6 @@
 package dev.fly_yeseul.qna.controller;
 
+import dev.fly_yeseul.qna.dtos.CommentDto;
 import dev.fly_yeseul.qna.entities.member.UserEntity;
 import dev.fly_yeseul.qna.entities.post.CommentEntity;
 import dev.fly_yeseul.qna.entities.post.PostEntity;
@@ -8,7 +9,9 @@ import dev.fly_yeseul.qna.services.CommentService;
 import dev.fly_yeseul.qna.services.PostService;
 import dev.fly_yeseul.qna.services.UserService;
 import dev.fly_yeseul.qna.vos.post.CommentVo;
+import org.apache.ibatis.ognl.Evaluation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -75,17 +78,19 @@ public class RootController {
             ModelAndView modelAndView,
             @RequestAttribute(value = "postEntity", required = false) PostEntity postEntity,
             @RequestAttribute(value = "userEntity", required = false) UserEntity userEntity,
-            @RequestAttribute(value = "commentEntity", required = false) CommentEntity commentEntity
+            CommentDto commentDto,
+            @PathVariable(name = "postIndex") int postIndex
     ) {
         if (userEntity == null) {
             modelAndView.setViewName("user/login");
         } else {
             PostEntity[] postEntities = this.postService.getPosts();
             UserEntity[] userEntities = this.userService.getProfiles();
-            CommentEntity[] commentEntities = this.commentService.getComment();
+            commentDto.setPostIndex(postIndex);
             modelAndView.addObject("postEntities", postEntities);
             modelAndView.addObject("userEntities", userEntities);
-            modelAndView.addObject("commentEntities", commentEntities);
+            modelAndView.addObject("commentDto", commentDto);
+            modelAndView.addObject("commentEntity", this.commentService.getComment(postEntity));
             modelAndView.setViewName("root/index");
         }
         return modelAndView;

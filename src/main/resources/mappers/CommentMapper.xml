@@ -11,7 +11,6 @@
     </insert>
 
     <select id="selectCommentByIndex"
-            parameterType="dev.fly_yeseul.qna.entities.post.PostEntity"
             resultType="dev.fly_yeseul.qna.entities.post.CommentEntity">
         SELECT MAX(`index`)    AS `index`,
                `post_index`    AS `postIndex`,
@@ -23,5 +22,6 @@
         FROM `first_board`.`comments` AS `comment`
         WHERE `post_index` = #{postIndex}
     </select>
+
 
 </mapper>

@@ -2,10 +2,10 @@ const inputPostIndex = window.document.getElementById('postIndexInput');
 const postIndex = window.document.getElementById('postIndex')
 const comment = window.document.getElementById('comment')
 
-const formData = new formData();
+const formData = new FormData();
 formData.append('postIndex', postIndex.value);
 
-inputProfile.addEventListener('click', () => {
+inputPostIndex.addEventListener('click', () => {
     const xhr = new XMLHttpRequest()
     const formData = new FormData();
     formData.append('comment', comment.value);
