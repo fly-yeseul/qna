@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 body > .header {
-    width: 100%;
+    width: 100vw;
     align-items: center;
     background-color: #ffffff;
     border-bottom: 0.0625rem solid rgb(225, 225, 225);

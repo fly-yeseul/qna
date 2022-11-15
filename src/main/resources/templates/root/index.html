@@ -26,6 +26,7 @@
                   th:with="dt = ${#dates.createNow()}"
                   method="post">
                 <div class="user-info">
+<!--                    TODO user/my>user/usernickname으로 수정하기-->
                     <a th:href="@{/}">
                         <img alt="User-Image" class="user-image" th:src="@{/resources/images/userimage.png}" th:if="${userEntity.getProfile() == null}">
                         <img alt="my-page" th:src="@{'/user/profile' (uid=${userEntity.getNickname()})}" th:if="${userEntity.getProfile() != null}">
@@ -48,21 +49,21 @@
                     <a class="poster" th:href="@{/}">
                         <span th:text="${post.getUserNickname()}"></span>
                     </a>
-                    <span th:text="${post.getContent()}"></span>
+                    <span th:utext="${post.getContent()}"></span>
                 </div>
-                <a class="comment-view" th:href="@{/}">
+                <a class="comment-view" th:href="@{'/post/detail/' + ${post.getIndex()}}">
                     <span>댓글</span>
                     <span>N</span>
                     <span>개 모두 보기</span>
                 </a>
-                <div class="comments">
-                    <div class="one-comment">
-                        <a class="commenter">
-                            <span th:text="${commentEntities.getUserNickname()}"></span>
-                        </a>
-                        <span th:text="${commentEntities.getComment()}"></span>
-                    </div>
-                </div>
+<!--                <div class="comments">-->
+<!--                    <div class="one-comment">-->
+<!--                        <a class="commenter">-->
+<!--                            <span th:text="${commentEntities.getUserNickname()}"></span>-->
+<!--                        </a>-->
+<!--                        <span th:text="${commentEntities.getComment()}"></span>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <div class="comment-container">
                     <div class="comment-write">
                         <input id="postIndexInput" type="hidden" name="postIndex" th:value="${post.getIndex()}">
@@ -85,7 +86,7 @@
                 <a th:href="@{/user/my}">
                     <span class="user-nickname" th:text="${userEntity.getNickname()}"></span>
                 </a>
-                <span class="user-name" th:text="${userEntity.getName()}"></span>
+                <span class="user-name" th:text="${userEntity.getNickname()}"></span>
             </div>
 
         </div>

@@ -1,0 +1,252 @@
+@charset "UTF-8";
+
+body {
+    background-color: #F5F6F7;
+    margin: 0;
+    padding: 0;
+}
+
+.main > .post-detail {
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: row;
+    margin-top: 2rem;
+}
+
+.main > .post-detail > .image-container {
+    background-color: #000000;
+    width: 42rem;
+    height: 42rem;
+    align-items: center;
+    border-right: 0.0625rem solid rgb(225, 225, 225);
+    display: flex;
+    flex-direction: column;
+}
+
+.main > .post-detail > .image-container > img {
+    width: 42rem;
+    height: 42rem;
+    object-fit: contain;
+}
+
+.main > .post-detail > .description-container {
+    width: 30rem;
+    background-color: #ffffff;
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.main > .post-detail > .description-container > .post-info {
+    display: flex;
+    flex-direction: column;
+    height: 4rem;
+    border-bottom: 0.0625rem solid rgb(225, 225, 225);
+    justify-content: center;
+}
+
+.main > .post-detail > .description-container > .post-info > .user-info {
+    width: 30rem;
+    display: flex;
+    flex-direction: row;
+    height: 3.75rem;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.main > .post-detail > .description-container > .post-info > .user-info > i {
+    margin-right: 1rem;
+}
+
+.main > .post-detail > .description-container > .post-info > .user-info > .user-image {
+    width: 42px;
+    height: 42px;
+    margin: 1rem;
+}
+
+.main > .post-detail > .description-container > .post-info > .user-info > .user-image > a {
+    width: 2rem;
+    height: 2rem;
+}
+
+.main > .post-detail > .description-container > .post-info > .user-info > .user-image > a > img {
+    border-radius: 100%;
+    border: 0.0625rem solid rgb(225, 225, 225);
+    overflow: hidden;
+    object-fit: cover;
+}
+
+
+.main > .post-detail > .description-container > .post-info > .user-info > .user-nickname {
+    width: 21rem;
+    height: 2rem;
+    color: black;
+    display: flex;
+    flex-direction: row;
+    font-weight: 500;
+    margin: 0.5rem;
+    align-items: center;
+}
+
+.main > .post-detail > .description-container > .post-info > .user-info > .user-nickname > a > span {
+    font-weight: 500;
+    color: black;
+
+}
+
+.main > .post-detail > .description-container > .content-container {
+    height: 29rem;
+    overflow: scroll;
+}
+
+.main > .post-detail > .description-container > .content-container > .post-contents {
+    display: flex;
+    flex-direction: column;
+    /*height: 4rem;*/
+    justify-content: center;
+}
+
+.main > .post-detail > .description-container > .content-container > .post-contents > .user-info {
+    width: 30rem;
+    display: flex;
+    flex-direction: row;
+    height: 3.75rem;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+.main > .post-detail > .description-container > .content-container > .post-contents > .user-info > .user-image > a {
+    width: 2rem;
+    height: 2rem;
+}
+
+.main > .post-detail > .description-container > .content-container > .post-contents > .user-info > .user-image > a > img {
+    border-radius: 100%;
+    border: 0.0625rem solid rgb(225, 225, 225);
+    overflow: hidden;
+    object-fit: cover;
+}
+
+.main > .post-detail > .description-container > .content-container > .post-contents > .user-info > .user-nickname > a > span {
+    margin-left: 0.6rem;
+    font-weight: 500;
+
+}
+
+.main > .post-detail > .description-container > .content-container > .post-contents > .content {
+    width: 27rem;
+    min-height: 1rem;
+    margin: 0.25rem 1rem;
+
+}
+
+.main > .post-detail > .description-container > .content-container > .comment-family {
+    width: 30rem;
+    height: 22rem;
+}
+
+.main > .post-detail > .description-container > .content-container > .comment-family > .comment-container {
+    height: 2.25rem;
+    margin: 1rem;
+}
+
+.main > .post-detail > .description-container > .content-container > .comment-family > .comment-container > .user-info {
+    width: 27rem;
+    display: flex;
+    flex-direction: row;
+    height: 3.75rem;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.main > .post-detail > .description-container > .content-container > .comment-family > .comment-container > .user-info > .user-image > a {
+    width: 2rem;
+    height: 2rem;
+}
+
+.main > .post-detail > .description-container > .content-container > .comment-family > .comment-container > .user-info > .user-image > a > img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 100%;
+    border: 0.0625rem solid rgb(225, 225, 225);
+    overflow: hidden;
+    object-fit: cover;
+}
+
+/*.main > .post-detail > .description-container > .content-container > .comment-family >  .comment-container > .user-info > .comment {*/
+/*    width: 22rem;*/
+/*}*/
+
+.main > .post-detail > .description-container > .content-container > .comment-family > .comment-container > .user-info > .comment > a > span {
+    font-weight: 500;
+    margin-left: 0.5rem;
+}
+
+.main > .post-detail > .description-container > .interaction {
+    width: 30rem;
+    height: 5rem;
+    border-top: 0.0625rem solid rgb(225, 225, 225);
+
+    margin-bottom: 0.75rem;
+}
+
+.main > .post-detail > .description-container > .interaction > .icons {
+    height: 3rem;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin-left: 1rem;
+}
+
+.main > .post-detail > .description-container > .interaction > .icons > i {
+    font-size: 1.5rem;
+    margin: 0.5rem;
+}
+
+.main > .post-detail > .description-container > .interaction > .icons > .comment {
+    width: 22rem;
+}
+
+.main > .post-detail > .description-container > .interaction > .like-info {
+    display: flex;
+    flex-direction: row;
+    margin-left: 1rem;
+}
+
+.main > .post-detail > .description-container > .interaction > .like-info > span {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.main > .post-detail > .description-container > .interaction > .written-date {
+    width: 22rem;
+    height: 1.2rem;
+    margin-left: 1rem;
+}
+
+.main > .post-detail > .description-container > .interaction > .written-date > span {
+    font-size: 0.7rem;
+    color: #6f6f78;
+    margin-top: 0.75rem;
+}
+
+.main > .post-detail > .description-container > .post-comment {
+    width: 30rem;
+    height: 3rem;
+    border-top: 0.0625rem solid rgb(225, 225, 225);
+    display: flex;
+    flex-direction: row
+}
+
+.main > .post-detail > .description-container > .post-comment > .comment-input {
+    width: 27rem;
+    padding-left: 1rem;
+}
+
+.main > .post-detail > .description-container > .post-comment > .button {
+    width: 3rem;
+    font-weight: 700;
+    color: #0095f6;
+}

@@ -1,11 +1,11 @@
-const inputProfile = window.document.getElementById('input-profile');
-const photo = window.document.getElementById('profile')
+const inputImage = window.document.getElementById('input-image');
+const photo = window.document.getElementById('photo')
 
-inputProfile.addEventListener('click', () => {
+inputImage.addEventListener('click', () => {
     const xhr = new XMLHttpRequest()
     const formData = new FormData();
-    formData.append('profile', profile.value);
-    xhr.open('POST', '/user/profile');
+    formData.append('photo', photo.value);
+    xhr.open('POST', '/post/write');
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {

@@ -1,11 +1,9 @@
 package dev.fly_yeseul.qna.dtos;
 
-import dev.fly_yeseul.qna.entities.post.CommentEntity;
+import dev.fly_yeseul.qna.entities.post.PostEntity;
 
-import java.util.Date;
-
-public class CommentDto extends CommentEntity {
-    public byte[] profile;
+public class PostDto extends PostEntity {
+        public byte[] profile;
 
     public byte[] getProfile() {
         return profile;

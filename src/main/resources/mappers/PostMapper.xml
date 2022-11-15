@@ -23,6 +23,29 @@
         ORDER BY `post`.`index` DESC
     </select>
 
+    <select id="selectPostByIndex"
+            resultType="dev.fly_yeseul.qna.entities.post.PostEntity">
+        SELECT `index`         AS `index`,
+               `user_email`    AS `userEmail`,
+               `user_nickname` AS `userNickname`,
+               `photo_data`    AS `photoData`,
+               `content`       AS `content`,
+               `posted_at`     AS `postedAt`,
+               `likes`         AS `likes`,
+               `profile`       AS `profile`
+        FROM `first_board`.`posts` AS `post`
+                 LEFT JOIN `first_member`.`users` on post.`user_nickname` = users.`nickname`
+        WHERE `index` = #{index}
+        LIMIT 1
+
+    </select>
+    <select id="selectPosterByIndex"
+            resultType="dev.fly_yeseul.qna.entities.post.PostEntity">
+        select `user_nickname` AS `userNickname`
+        FROM `first_board`.`posts` AS `post`
+        WHERE `index` = #{index}
+    </select>
+
     <select id="selectPostCountByEmail"
             resultType="_int">
         SELECT COUNT(0)

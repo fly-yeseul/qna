@@ -1,25 +1,17 @@
 package dev.fly_yeseul.qna.services;
 
 
+import dev.fly_yeseul.qna.dtos.PostDto;
 import dev.fly_yeseul.qna.entities.member.UserEntity;
-import dev.fly_yeseul.qna.entities.post.PhotoEntity;
 import dev.fly_yeseul.qna.entities.post.PostEntity;
-import dev.fly_yeseul.qna.enums.post.CommentResult;
 import dev.fly_yeseul.qna.enums.post.PostResult;
-import dev.fly_yeseul.qna.enums.post.ReadResult;
 import dev.fly_yeseul.qna.mappers.IPostMapper;
-import dev.fly_yeseul.qna.utils.CryptoUtil;
-import dev.fly_yeseul.qna.vos.post.CommentVo;
 import dev.fly_yeseul.qna.vos.post.PostVo;
-import dev.fly_yeseul.qna.vos.post.ReadVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
 
 @Service(value = "dev.fly_yeseul.qna.services.PostService")
 public class PostService {
@@ -40,6 +32,7 @@ public class PostService {
     }
 
 
+
     public void postPhoto(
             MultipartFile multipartFile
     ) throws IOException {
@@ -51,9 +44,27 @@ public class PostService {
         PostEntity postEntity = new PostEntity(multipartFile.getBytes());
     }
 
+//    public PostEntity getDetail(int postIndex) {
+//       return this.postMapper.selectPostByIndex();
+//    }
+
+    public void getPoster(PostDto postDto) {
+        PostEntity postEntity = this.postMapper.selectPostByIndex(postDto.getIndex());
+        postDto.setIndex(postEntity.getIndex());
+        postDto.setPostedAt(postEntity.getPostedAt());
+        postDto.setContent(postEntity.getContent());
+        postDto.setPhotoData(postEntity.getPhotoData());
+        postDto.setUserEmail(postEntity.getUserEmail());
+        postDto.setLikes(postEntity.getLikes());
+        postDto.setUserNickname(postEntity.getUserNickname());
+
+    }
     public PostEntity[] getPosts() {return this.postMapper.selectPost();}
 
     public int countPosts(UserEntity userEntity){
         return this.postMapper.selectPostCountByEmail(userEntity.getEmail());
     }
+
+
 }
+

@@ -111,6 +111,9 @@ public class UserService {
     public UserEntity[] getProfiles(){
         return this.userMapper.selectProfile();
     }
+
+    public UserEntity getProfile(int postIndex) {return this.userMapper.selectProfileByPostIndex();}
+
     public void modifyProfilePhoto(UserEntity userEntity){
         this.userMapper.updateProfilePhoto(userEntity);
     }

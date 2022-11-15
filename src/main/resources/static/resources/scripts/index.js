@@ -3,7 +3,6 @@ const postIndex = window.document.getElementById('postIndex')
 const comment = window.document.getElementById('comment')
 
 const formData = new FormData();
-formData.append('postIndex', postIndex.value);
 
 inputPostIndex.addEventListener('click', () => {
     const xhr = new XMLHttpRequest()

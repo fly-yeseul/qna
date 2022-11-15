@@ -77,10 +77,20 @@
                `email`    AS `eamil`,
                `name`     AS `name`,
                `nickname` AS `nickname`,
-               `intro`    AS `intro`
+               `intro`    AS `intro`,
+               `profile`  AS `profile`
 
         FROM `first_member`.`users` AS `user`
         WHERE `nickname` = #{nickname}
+    </select>
+
+    <select id="selectProfileByPostIndex"
+            resultType="dev.fly_yeseul.qna.entities.member.UserEntity">
+        SELECT *
+        FROM `first_member`.`users` AS `user`
+        LEFT JOIN `first_board`.`posts` ON `user`.`nickname` = `posts`.`user_nickname`
+        WHERE `posts`.`index` = #{index};
+
     </select>
 
     <update id="updateSession"

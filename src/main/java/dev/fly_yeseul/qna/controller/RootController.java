@@ -63,7 +63,7 @@ public class RootController {
         this.commentService.postComment(commentVo);
 //        System.out.println("입력됨");
 
-        if(commentVo.getResult() == CommentResult.SUCCESS) {
+        if (commentVo.getResult() == CommentResult.SUCCESS) {
             modelAndView.setViewName("redirect:/");
         } else {
             modelAndView.setViewName("redirect:/");
@@ -77,24 +77,35 @@ public class RootController {
     public ModelAndView getIndex(
             ModelAndView modelAndView,
             @RequestAttribute(value = "postEntity", required = false) PostEntity postEntity,
-            @RequestAttribute(value = "userEntity", required = false) UserEntity userEntity,
-            CommentDto commentDto,
-            @PathVariable(name = "postIndex") int postIndex
+            @RequestAttribute(value = "userEntity", required = false) UserEntity userEntity
     ) {
         if (userEntity == null) {
             modelAndView.setViewName("user/login");
         } else {
             PostEntity[] postEntities = this.postService.getPosts();
             UserEntity[] userEntities = this.userService.getProfiles();
-            commentDto.setPostIndex(postIndex);
             modelAndView.addObject("postEntities", postEntities);
             modelAndView.addObject("userEntities", userEntities);
-            modelAndView.addObject("commentDto", commentDto);
-            modelAndView.addObject("commentEntity", this.commentService.getComment(postEntity));
             modelAndView.setViewName("root/index");
         }
         return modelAndView;
     }
 
+
+    //    TODO "root/userNickname"으로 주소 수정해야함 해야함해야함 service/mapping 다 고치기
+    @RequestMapping(value = "{userNickname}", method = RequestMethod.GET)
+    public ModelAndView getMy(
+            ModelAndView modelAndView,
+            @RequestAttribute(value = "userEntity", required = true) UserEntity userEntity,
+            @RequestAttribute(value = "postEntity", required = false) PostEntity postEntity,
+            @PathVariable(value = "userNickname") String userNickname
+    ) {
+        PostEntity[] postEntities = this.postService.getPosts();
+        modelAndView.addObject("postEntities", postEntities);
+        modelAndView.addObject("userEntity", userEntity);
+        modelAndView.addObject("postCount", postService.countPosts(userEntity));
+        modelAndView.setViewName("user/my");
+        return modelAndView;
+    }
 
 }

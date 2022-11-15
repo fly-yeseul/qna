@@ -10,16 +10,31 @@
         VALUES (#{userEmail}, #{userNickname}, #{comment}, #{postIndex})
     </insert>
 
-    <select id="selectCommentByIndex"
+<!--    <select id="selectCommentByIndex"-->
+<!--            resultType="dev.fly_yeseul.qna.dtos.CommentDto">-->
+<!--        SELECT MAX(`index`)    AS `index`,-->
+<!--               `post_index`    AS `postIndex`,-->
+<!--               `user_email`    AS `userEmail`,-->
+<!--               `user_nickname` AS `userNickname`,-->
+<!--               `comment`       AS `comment`,-->
+<!--               `comment_at`    AS `commentAt`,-->
+<!--               `comment_likes` AS `commentLikes`-->
+<!--        FROM `first_board`.`comments` AS `comment`-->
+<!--        WHERE `post_index` = #{postIndex}-->
+<!--    </select>-->
+
+    <select id="selectComment"
             resultType="dev.fly_yeseul.qna.entities.post.CommentEntity">
-        SELECT MAX(`index`)    AS `index`,
-               `post_index`    AS `postIndex`,
-               `user_email`    AS `userEmail`,
+        SELECT `index` AS `index`,
+               `comment` AS `comment`,
+               `post_index` AS `postIndex`,
+               `user_email` AS `userEmail`,
                `user_nickname` AS `userNickname`,
-               `comment`       AS `comment`,
-               `comment_at`    AS `commentAt`,
-               `comment_likes` AS `commentLikes`
+               `comment_at` AS `commentAt`,
+               `comment_likes` AS `commentLike`,
+               `profile` AS `profile`
         FROM `first_board`.`comments` AS `comment`
+                 LEFT JOIN `first_member`.`users` on comment.`user_nickname` = users.`nickname`
         WHERE `post_index` = #{postIndex}
     </select>
 

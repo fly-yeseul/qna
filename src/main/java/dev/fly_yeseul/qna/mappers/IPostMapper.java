@@ -1,12 +1,9 @@
 package dev.fly_yeseul.qna.mappers;
 
-import dev.fly_yeseul.qna.entities.post.PhotoEntity;
 import dev.fly_yeseul.qna.entities.post.PostEntity;
-import javafx.geometry.Pos;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.Map;
 
 @Mapper
 public interface IPostMapper {
@@ -16,6 +13,13 @@ public interface IPostMapper {
     int selectPostCountByEmail(
             @Param(value = "userEmail") String userEmail
     );
+
+    PostEntity selectPostByIndex(
+            @Param(value = "index") int index
+    );
+//    PostEntity selectPosterByIndex(
+//            @Param(value = "index") int index
+//    );
 
     PostEntity[] selectPost();
 

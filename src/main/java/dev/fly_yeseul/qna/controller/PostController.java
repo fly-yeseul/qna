@@ -1,14 +1,19 @@
 package dev.fly_yeseul.qna.controller;
 
+import dev.fly_yeseul.qna.dtos.CommentDto;
+import dev.fly_yeseul.qna.dtos.PostDto;
 import dev.fly_yeseul.qna.entities.member.UserEntity;
-import dev.fly_yeseul.qna.entities.post.PhotoEntity;
+
+import dev.fly_yeseul.qna.entities.post.CommentEntity;
 import dev.fly_yeseul.qna.entities.post.PostEntity;
 import dev.fly_yeseul.qna.enums.post.PostResult;
+import dev.fly_yeseul.qna.services.CommentService;
 import dev.fly_yeseul.qna.services.PostService;
+import dev.fly_yeseul.qna.services.UserService;
 import dev.fly_yeseul.qna.vos.post.PostVo;
-import org.apache.ibatis.annotations.Param;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +22,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Blob;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.Date;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller(value = "dev.fly_yeseul.qna.controller.PostController")
@@ -31,17 +32,21 @@ import java.util.stream.Collectors;
 public class PostController {
 
     private final PostService postService;
+    private final UserService userService;
+    private final CommentService commentService;
+
 
     @Autowired
-    public PostController(PostService postService) {
+    public PostController(PostService postService, UserService userService, CommentService commentService) {
         this.postService = postService;
+        this.userService = userService;
+        this.commentService = commentService;
     }
 
     @RequestMapping(value = "write", method = RequestMethod.GET)
     public ModelAndView getWrite(
             ModelAndView modelAndView,
-            @RequestAttribute(value = "userEntity", required = false) UserEntity userEntity,
-            @RequestAttribute(value = "postEntity", required = false) PostEntity postEntity
+            @RequestAttribute(value = "userEntity", required = false) UserEntity userEntity
     ) {
         modelAndView.setViewName("post/write");
 
@@ -70,17 +75,16 @@ public class PostController {
     }
 
 
-
     @RequestMapping(value = "write", method = RequestMethod.POST)
     public ModelAndView postWrite(
             @RequestAttribute(value = "userEntity", required = false) UserEntity userEntity,
-            @RequestAttribute(value = "postEntity", required = false) PostEntity postEntity,
+//            @RequestAttribute(value = "postEntity", required = false) PostEntity postEntity,
             @RequestParam(value = "content", required = true, defaultValue = "") String content,
             @RequestParam(value = "photo", required = true) MultipartFile photo,
             ModelAndView modelAndView,
             PostVo postVo
     ) throws IOException {
-        if(userEntity == null){
+        if (userEntity == null) {
             modelAndView.setViewName("user/login");
             return modelAndView;
         }
@@ -88,17 +92,44 @@ public class PostController {
         postVo.setUserEmail(userEntity.getEmail());
         postVo.setUserNickname(userEntity.getNickname());
         postVo.setPostedAt(new Date());
-        postVo.setContent(content);
+        postVo.setContent(content.replace("\r\n", "<br>"));
         postVo.setPhotoData(photo.getBytes());
         this.postService.postAdd(postVo);
 
 
-        if(postVo.getResult() == PostResult.SUCCESS) {
+        if (postVo.getResult() == PostResult.SUCCESS) {
             modelAndView.setViewName("redirect:/");
         } else {
             modelAndView.setViewName("post/write");
         }
         return modelAndView;
+    }
+
+    @RequestMapping(value = {"detail/{pid}"}, method = RequestMethod.GET)
+    public ModelAndView getDetail(
+            PostDto postDto,
+            PostEntity postEntity,
+            CommentDto commentDto,
+            @RequestAttribute(value = "userEntity") UserEntity userEntity,
+            ModelAndView modelAndView,
+            @PathVariable(value = "pid", required = true) int postIndex
+
+    ) {
+        System.out.println(postIndex);
+        postEntity.setIndex(postIndex);
+        postDto.setIndex(postIndex);
+        commentDto.setPostIndex(postIndex);
+
+        this.postService.getPoster(postDto);
+        CommentEntity[] commentEntities = this.commentService.getComments(postIndex);
+
+        modelAndView.addObject("postDto", postDto);
+        modelAndView.addObject("commentEntities", commentEntities);
+        modelAndView.addObject("postEntity", postEntity);
+        modelAndView.addObject("userEntity", userEntity);
+        modelAndView.setViewName("post/detail");
+        return modelAndView;
+
     }
 
     @RequestMapping(value = "image", method = RequestMethod.GET)
@@ -113,7 +144,7 @@ public class PostController {
         if (Arrays.stream(posts).noneMatch(x -> x.getIndex() == postIndex)) {
             status = HttpStatus.NOT_FOUND;
         } else {
-            PostEntity post= Arrays.stream(posts).filter(x -> x.getIndex() == postIndex).collect(Collectors.toList()).get(0);
+            PostEntity post = Arrays.stream(posts).filter(x -> x.getIndex() == postIndex).collect(Collectors.toList()).get(0);
             data = post.getPhotoData();
             headers.add("Content-Type", "image/png");
             headers.add("Content-Length", String.valueOf(data.length));
@@ -121,4 +152,6 @@ public class PostController {
         }
         return new ResponseEntity<>(data, headers, status);
     }
+
+
 }

@@ -2,11 +2,12 @@
 
 @import "header.css";
 @import "index.main.css";
-@import "static/user/resources/reg.css";
-@import "static/user/resources/login.css";
-@import "static/user/resources/my.css";
-@import "static/user/resources/edit.css";
-@import "static/user/resources/edit-profile.css";
+@import "../../user/stylesheets/reg.css";
+@import "../../user/stylesheets/login.css";
+@import "../../user/stylesheets/my.css";
+@import "../../user/stylesheets/edit.css";
+@import "../../user/stylesheets/edit-profile.css";
+@import "static/post/resources/stylesheets/detail.css";
 
 :root {
     --content-max-width: 60rem;
@@ -33,6 +34,7 @@ body {
     font-size: 0.9rem;
     justify-content: flex-start;
     margin: unset;
+    padding: unset;
     position: absolute;
 }
 
