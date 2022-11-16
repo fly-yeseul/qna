@@ -6,10 +6,12 @@ import dev.fly_yeseul.qna.entities.member.UserEntity;
 
 import dev.fly_yeseul.qna.entities.post.CommentEntity;
 import dev.fly_yeseul.qna.entities.post.PostEntity;
+import dev.fly_yeseul.qna.enums.post.CommentResult;
 import dev.fly_yeseul.qna.enums.post.PostResult;
 import dev.fly_yeseul.qna.services.CommentService;
 import dev.fly_yeseul.qna.services.PostService;
 import dev.fly_yeseul.qna.services.UserService;
+import dev.fly_yeseul.qna.vos.post.CommentVo;
 import dev.fly_yeseul.qna.vos.post.PostVo;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,27 +51,6 @@ public class PostController {
             @RequestAttribute(value = "userEntity", required = false) UserEntity userEntity
     ) {
         modelAndView.setViewName("post/write");
-
-//        // 사진 가져오기
-//        byte photoArray[] = null;
-//        final String BASE_64_PREFIX = "data:image/png;base64";
-//        try {
-//            String base64Url = String.valueOf(photo);
-//            if(base64Url.startsWith(BASE_64_PREFIX)) {
-//                photoArray = Base64.getDecoder().decode(base64Url.substring(BASE_64_PREFIX.length()));
-//            }
-//        } catch (Exception e){
-//            e.printStackTrace();
-//        }
-//
-//        Map<String, Object> result = postService.getPhoto(postVo.getIndex());
-//
-//        byte arr[] = photo.getBytes();
-//
-//        if(arr.length > 0 && arr != null) {
-//            String base64Encode = byteToBase64
-//        }
-
         modelAndView.addObject("userEntity", userEntity);
         return modelAndView;
     }
@@ -105,6 +86,41 @@ public class PostController {
         return modelAndView;
     }
 
+    @RequestMapping(value = {"detail/{pid}"}, method = RequestMethod.POST)
+    public ModelAndView postDetail(
+        ModelAndView modelAndView,
+        CommentVo commentVo,
+        PostEntity postEntity,
+        @PathVariable(value = "pid") int postIndex,
+        @RequestAttribute(value = "userEntity") UserEntity userEntity,
+        @RequestParam(value = "comment") String comment
+    ) throws IOException {
+        if(userEntity == null){
+            modelAndView.setViewName("user/login");
+            return modelAndView;
+        }
+
+        commentVo.setResult(null);
+        commentVo.setPostIndex(postIndex);;
+        commentVo.setComment(comment);
+        commentVo.setUserEmail(userEntity.getEmail());
+        commentVo.setUserNickname(userEntity.getNickname());
+        commentVo.setProfile(userEntity.getProfile());
+        this.commentService.postComment(commentVo);
+
+        modelAndView.addObject("userEntity", userEntity);
+        modelAndView.addObject("postEntity", postEntity);
+
+        if (commentVo.getResult() == CommentResult.SUCCESS) {
+            modelAndView.setViewName("redirect:/");
+        } else {
+            modelAndView.setViewName("redirect:/");
+        }
+
+        modelAndView.setViewName("redirect:/post/detail/{pid}");
+        return modelAndView;
+    }
+
     @RequestMapping(value = {"detail/{pid}"}, method = RequestMethod.GET)
     public ModelAndView getDetail(
             PostDto postDto,
@@ -115,7 +131,7 @@ public class PostController {
             @PathVariable(value = "pid", required = true) int postIndex
 
     ) {
-        System.out.println(postIndex);
+//        System.out.println(postIndex);
         postEntity.setIndex(postIndex);
         postDto.setIndex(postIndex);
         commentDto.setPostIndex(postIndex);

@@ -40,11 +40,8 @@ public class RootController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ModelAndView postComment(
             @RequestAttribute(value = "userEntity", required = false) UserEntity userEntity,
-            @RequestAttribute(value = "postEntity", required = false) PostEntity postEntity,
-            @RequestAttribute(value = "commentEntity", required = false) CommentEntity commentEntity,
             @RequestParam(value = "postIndex", required = true) int postIndex,
             @RequestParam(value = "comment", required = true) String comment,
-            HttpServletRequest request,
             ModelAndView modelAndView,
             CommentVo commentVo
     ) throws IOException {

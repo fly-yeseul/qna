@@ -15,6 +15,15 @@ public class CommentEntity {
 
     }
 
+    public CommentEntity(String comment, int postIndex, String userEmail, String userNickname, Date commentAt, int commentLikes) {
+        this.comment = comment;
+        this.postIndex = postIndex;
+        this.userEmail = userEmail;
+        this.userNickname = userNickname;
+        this.commentAt = commentAt;
+        this.commentLikes = commentLikes;
+    }
+
     public CommentEntity(int index, String comment, int postIndex, String userEmail, String userNickname, Date commentAt, int commentLikes) {
         this.index = index;
         this.comment = comment;

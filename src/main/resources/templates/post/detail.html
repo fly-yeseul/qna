@@ -10,6 +10,7 @@
     <link rel="stylesheet" as="style" crossorigin
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css"/>
     <script src="https://kit.fontawesome.com/e099593f60.js" crossorigin="anonymous"></script>
+    <script th:src="@{/post/resources/scripts/detail.js}" defer></script>
     <title>Instagram</title>
 </head>
 <body>
@@ -89,7 +90,7 @@
                 </div>
             </div>
             <form class="post-comment" method="post" th:with="dt = ${#dates.createNow()}">
-                <input id="postIndexInput" type="hidden" name="postIndex">
+                <input id="postIndexInput" type="hidden" th:value="${postEntity.getIndex()}" name="postIndex">
                 <input name="comment" class="comment-input" type="text" placeholder="댓글 달기..." autocomplete="off" autocapitalize="off">
                 <input class="button" type="submit" value="게시">
             </form>
