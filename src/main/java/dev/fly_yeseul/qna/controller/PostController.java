@@ -101,6 +101,7 @@ public class PostController {
         }
 
         commentVo.setResult(null);
+        System.out.println("여기는되니?");
         commentVo.setPostIndex(postIndex);;
         commentVo.setComment(comment);
         commentVo.setUserEmail(userEntity.getEmail());
@@ -117,7 +118,7 @@ public class PostController {
             modelAndView.setViewName("redirect:/");
         }
 
-        modelAndView.setViewName("redirect:/post/detail/{pid}");
+        modelAndView.setViewName("redirect:/post/detail");
         return modelAndView;
     }
 

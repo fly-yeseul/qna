@@ -16,20 +16,19 @@
 <th:block th:replace="~{fragments/header.html :: content}"></th:block>
 <main class="main">
     <section class="left">
-        <div class="no-post" th:if="${postEntities == null}">
+        <div class="no-post" th:if="${postDtos == null}">
             <i class="icon fa-regular fa-face-grimace fa-10x"></i>
             <span>표시할 게시글이 없습니다.</span>
         </div>
         <section class="recent-post">
             <form class="post"
-                  th:each="post : ${postEntities}"
+                  th:each="post : ${postDtos}"
                   th:with="dt = ${#dates.createNow()}"
                   method="post">
                 <div class="user-info">
 <!--                    TODO user/my>user/usernickname으로 수정하기-->
-                    <a th:href="@{/}">
-                        <img alt="User-Image" class="user-image" th:src="@{/resources/images/userimage.png}" th:if="${userEntity.getProfile() == null}">
-                        <img alt="my-page" th:src="@{'/user/profile' (uid=${userEntity.getNickname()})}" th:if="${userEntity.getProfile() != null}">
+                    <a th:href="@{'/' + ${post.getUserNickname()}}">
+                        <img alt="my-page" th:src="@{'/user/profile' (uid=${post.getUserNickname()})}" th:if="${post.getProfile() != null}">
                         <span class="user-name" th:text="${post.getUserNickname()}"></span>
                     </a>
                 </div>
@@ -43,7 +42,8 @@
                     <i class="icon fa-regular fa-comment"></i>
                 </div>
                 <div class="likes">
-                    <span>n명이 좋아합니다.</span>
+                    <span th:if="${post.getLikes() == 0}"></span>
+                    <span th:if="${post.getLikes() != 0}">n명이 좋아합니다.</span>
                 </div>
                 <div class="content-container">
                     <a class="poster" th:href="@{/}">

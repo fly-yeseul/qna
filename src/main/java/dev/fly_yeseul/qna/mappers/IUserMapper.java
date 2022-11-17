@@ -37,4 +37,8 @@ public interface IUserMapper {
     UserEntity[] selectProfile();
 
     UserEntity selectProfileByPostIndex();
+
+    UserEntity selectUserByNickname(
+            @Param(value = "userNickname") String nickname
+    );
 }

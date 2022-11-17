@@ -88,9 +88,20 @@
             resultType="dev.fly_yeseul.qna.entities.member.UserEntity">
         SELECT *
         FROM `first_member`.`users` AS `user`
-        LEFT JOIN `first_board`.`posts` ON `user`.`nickname` = `posts`.`user_nickname`
+                 LEFT JOIN `first_board`.`posts` ON `user`.`nickname` = `posts`.`user_nickname`
         WHERE `posts`.`index` = #{index};
 
+    </select>
+
+    <select id="selectUserByNickname"
+            resultType="dev.fly_yeseul.qna.entities.member.UserEntity">
+        SELECT `email`    AS `email`,
+               `name`     AS `name`,
+               `nickname` AS `nickname`,
+               `intro`    AS `intro`,
+               `profile`  AS `profile`
+        FROM `first_member`.users
+        WHERE `nickname` = #{userNickname}
     </select>
 
     <update id="updateSession"

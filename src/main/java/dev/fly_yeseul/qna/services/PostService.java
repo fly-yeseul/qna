@@ -59,12 +59,20 @@ public class PostService {
         postDto.setUserNickname(postEntity.getUserNickname());
 
     }
-    public PostEntity[] getPosts() {return this.postMapper.selectPost();}
+    public PostDto[] getPosts() {return this.postMapper.selectPosts();}
+
+    public PostDto[] getPostsByNickname(
+            String userNickname
+    ){
+        return this.postMapper.selectPostsByNickname(userNickname);
+    }
 
     public int countPosts(UserEntity userEntity){
         return this.postMapper.selectPostCountByEmail(userEntity.getEmail());
     }
 
-
+    public int countPostForUnm(String userNickname){
+        return this.postMapper.selectPostCountByNickname(userNickname);
+    }
 }
 

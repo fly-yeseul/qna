@@ -27,6 +27,8 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 @Controller(value = "dev.fly_yeseul.qna.controller.UserController")
+
+
 @RequestMapping(value = "/user")
 public class UserController {
 
@@ -194,19 +196,19 @@ public class UserController {
             @RequestParam(value = "uid", required = true) String nickname
             ) {
         UserEntity[] profiles = this.userService.getProfiles();
-        byte[] data = null;
+        byte[] data1 = null;
         HttpHeaders headers = new HttpHeaders();
         HttpStatus status;
         if(Arrays.stream(profiles).noneMatch(x -> x.getNickname() == nickname)) {
             status = HttpStatus.NOT_FOUND;
         } else {
             UserEntity profile = Arrays.stream(profiles).filter(x -> x.getNickname() == nickname).collect(Collectors.toList()).get(0);
-            data = profile.getProfile();
+            data1 = profile.getProfile();
             headers.add("Content-Type", "image/png");
-            headers.add("Content-Length", String.valueOf(data.length));
+            headers.add("Content-Length", String.valueOf(data1.length));
             status = HttpStatus.OK;
         }
-        return new ResponseEntity<>(data, headers, status);
+        return new ResponseEntity<>(data1, headers, status);
     }
 
 

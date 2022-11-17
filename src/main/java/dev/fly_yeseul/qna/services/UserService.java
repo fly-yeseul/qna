@@ -112,6 +112,10 @@ public class UserService {
         return this.userMapper.selectProfile();
     }
 
+    public UserEntity getVisited(String nickname){
+        return this.userMapper.selectUserByNickname(nickname);
+    }
+
     public UserEntity getProfile(int postIndex) {return this.userMapper.selectProfileByPostIndex();}
 
     public void modifyProfilePhoto(UserEntity userEntity){

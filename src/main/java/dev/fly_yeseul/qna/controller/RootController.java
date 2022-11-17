@@ -1,6 +1,7 @@
 package dev.fly_yeseul.qna.controller;
 
 import dev.fly_yeseul.qna.dtos.CommentDto;
+import dev.fly_yeseul.qna.dtos.PostDto;
 import dev.fly_yeseul.qna.entities.member.UserEntity;
 import dev.fly_yeseul.qna.entities.post.CommentEntity;
 import dev.fly_yeseul.qna.entities.post.PostEntity;
@@ -73,15 +74,15 @@ public class RootController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView getIndex(
             ModelAndView modelAndView,
-            @RequestAttribute(value = "postEntity", required = false) PostEntity postEntity,
+            @RequestAttribute(value = "postDto", required = false) PostDto postDto,
             @RequestAttribute(value = "userEntity", required = false) UserEntity userEntity
     ) {
         if (userEntity == null) {
             modelAndView.setViewName("user/login");
         } else {
-            PostEntity[] postEntities = this.postService.getPosts();
+            PostDto[] postDtos = this.postService.getPosts();
             UserEntity[] userEntities = this.userService.getProfiles();
-            modelAndView.addObject("postEntities", postEntities);
+            modelAndView.addObject("postDtos", postDtos);
             modelAndView.addObject("userEntities", userEntities);
             modelAndView.setViewName("root/index");
         }
@@ -90,18 +91,23 @@ public class RootController {
 
 
     //    TODO "root/userNickname"으로 주소 수정해야함 해야함해야함 service/mapping 다 고치기
-    @RequestMapping(value = "{userNickname}", method = RequestMethod.GET)
-    public ModelAndView getMy(
+    @RequestMapping(value = "{unm}", method = RequestMethod.GET)
+    public ModelAndView getUserPage(
             ModelAndView modelAndView,
             @RequestAttribute(value = "userEntity", required = true) UserEntity userEntity,
-            @RequestAttribute(value = "postEntity", required = false) PostEntity postEntity,
-            @PathVariable(value = "userNickname") String userNickname
+            @RequestAttribute(value = "postDto", required = false) PostDto postDto,
+            @PathVariable(value = "unm") String userNickname
     ) {
-        PostEntity[] postEntities = this.postService.getPosts();
-        modelAndView.addObject("postEntities", postEntities);
+
+//        TODO nickname 으로 필터링해서 게시글 표시해야함.
+        PostDto[] postDtos = this.postService.getPostsByNickname(userNickname);
+        UserEntity visitedUser = this.userService.getVisited(userNickname);
+        modelAndView.addObject("postDtos", postDtos);
         modelAndView.addObject("userEntity", userEntity);
-        modelAndView.addObject("postCount", postService.countPosts(userEntity));
-        modelAndView.setViewName("user/my");
+        modelAndView.addObject("postCount", postService.countPostForUnm(userNickname));
+        modelAndView.addObject("userNickname", userNickname);
+        modelAndView.addObject("visitedUser", visitedUser);
+        modelAndView.setViewName("root/unm");
         return modelAndView;
     }
 

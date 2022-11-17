@@ -1,5 +1,6 @@
 package dev.fly_yeseul.qna.mappers;
 
+import dev.fly_yeseul.qna.dtos.PostDto;
 import dev.fly_yeseul.qna.entities.post.PostEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -14,6 +15,10 @@ public interface IPostMapper {
             @Param(value = "userEmail") String userEmail
     );
 
+    int selectPostCountByNickname(
+            @Param(value = "userNickname") String userNickname
+    );
+
     PostEntity selectPostByIndex(
             @Param(value = "index") int index
     );
@@ -21,7 +26,13 @@ public interface IPostMapper {
 //            @Param(value = "index") int index
 //    );
 
-    PostEntity[] selectPost();
+    PostDto[] selectPosts(
+
+    );
+
+    PostDto[] selectPostsByNickname(
+            @Param(value = "userNickname") String userNickname
+    );
 
     // 이미지 불러오는 interface
 //    Map<String, Object> selectPhoto(int index);
