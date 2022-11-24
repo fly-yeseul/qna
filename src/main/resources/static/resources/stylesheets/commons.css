@@ -4,7 +4,7 @@
 @import "index.main.css";
 @import "../../user/stylesheets/reg.css";
 @import "../../user/stylesheets/login.css";
-@import "../../user/stylesheets/my.css";
+@import "static/resources/stylesheets/profile.css";
 @import "../../user/stylesheets/edit.css";
 @import "../../user/stylesheets/edit-profile.css";
 @import "static/post/resources/stylesheets/detail.css";

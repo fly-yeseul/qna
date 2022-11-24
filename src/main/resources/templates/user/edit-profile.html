@@ -26,12 +26,9 @@
         <label class="input-profile">
             <span class="hint" hidden>사진</span>
             <a class="profile" for="input-profile" th:if="${userEntity.getProfile() != null}">
-                <img th:src="${userEntity.getProfile()}">
+                <img th:src="@{'/user/profile' (uid=${userEntity.getNickname()})}">
             </a>
-            <span class="guide" th:if = "${userEntity.getProfile() == null}">사진을 업로드하세요.</span>
-            <label class="button-blue" for="input-profile"
-            th:if = "${userEntity.getProfile() == null}">컴퓨터에서 선택</label>
-            <Input class="button" name="profile" id="input-profile" type="file" accept="image/png, image/jpeg">
+            <Input class="button" name="profile" id="input-profile" type="file" accept="image/*">
         </label>
     </div>
     <div class="line"></div>

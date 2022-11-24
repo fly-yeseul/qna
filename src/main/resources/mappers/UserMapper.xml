@@ -131,4 +131,14 @@
         LIMIT 1
     </update>
 
+    <update id="updateUserInfo"
+            parameterType="dev.fly_yeseul.qna.entities.member.UserEntity">
+        UPDATE `first_member`.`users`
+        SET `name`     = #{name},
+            `nickname` = #{nickname},
+            `intro`    = #{intro}
+        WHERE `email` = #{email}
+        LIMIT 1
+    </update>
+
 </mapper>

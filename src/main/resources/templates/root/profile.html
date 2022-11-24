@@ -6,11 +6,11 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/commons.css}">
-    <link rel="stylesheet" th:href="@{/user/stylesheets/my.css}">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/profile.css}">
     <link rel="stylesheet" as="style" crossorigin
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css"/>
     <script src="https://kit.fontawesome.com/e099593f60.js" crossorigin="anonymous"></script>
-    <title th:text="${visitedUser.getName()} + '(@' + ${userEntity.getNickname()} + ') ・ Instagram'"></title>
+    <title th:text="${visitedUser.getName()} + '(@' + ${visitedUser.getNickname()} + ') ・ Instagram'"></title>
 </head>
 <body>
 <th:block th:replace="~{fragments/header.html :: content}"></th:block>
@@ -60,7 +60,7 @@
 
         <div class="user-detail">
             <span class="user-name" th:text="${visitedUser.getName()}"></span>
-            <span class="user-intro" th:text="${visitedUser.getIntro()}"></span>
+            <span class="user-intro" th:utext="${visitedUser.getIntro()}"></span>
         </div>
     </div>
 

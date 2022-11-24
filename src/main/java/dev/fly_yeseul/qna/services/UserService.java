@@ -6,6 +6,7 @@ import dev.fly_yeseul.qna.enums.member.user.LoginResult;
 import dev.fly_yeseul.qna.enums.member.user.RegisterResult;
 import dev.fly_yeseul.qna.mappers.IUserMapper;
 import dev.fly_yeseul.qna.utils.CryptoUtil;
+import dev.fly_yeseul.qna.vos.member.EditVo;
 import dev.fly_yeseul.qna.vos.member.LoginVo;
 import dev.fly_yeseul.qna.vos.member.RegisterVo;
 import org.apache.commons.lang3.time.DateUtils;
@@ -118,7 +119,13 @@ public class UserService {
 
     public UserEntity getProfile(int postIndex) {return this.userMapper.selectProfileByPostIndex();}
 
-    public void modifyProfilePhoto(UserEntity userEntity){
-        this.userMapper.updateProfilePhoto(userEntity);
+    public void modifyProfilePhoto(EditVo editVo){
+        this.userMapper.updateProfilePhoto(editVo);
+    }
+
+    public void modifyUserInfo(
+            EditVo editVo
+    ){
+        this.userMapper.updateUserInfo(editVo);
     }
 }

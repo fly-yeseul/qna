@@ -89,17 +89,13 @@ public class RootController {
         return modelAndView;
     }
 
-
-    //    TODO "root/userNickname"으로 주소 수정해야함 해야함해야함 service/mapping 다 고치기
     @RequestMapping(value = "{unm}", method = RequestMethod.GET)
     public ModelAndView getUserPage(
             ModelAndView modelAndView,
             @RequestAttribute(value = "userEntity", required = true) UserEntity userEntity,
             @RequestAttribute(value = "postDto", required = false) PostDto postDto,
             @PathVariable(value = "unm") String userNickname
-    ) {
-
-//        TODO nickname 으로 필터링해서 게시글 표시해야함.
+    ) throws IOException {
         PostDto[] postDtos = this.postService.getPostsByNickname(userNickname);
         UserEntity visitedUser = this.userService.getVisited(userNickname);
         modelAndView.addObject("postDtos", postDtos);
@@ -107,7 +103,7 @@ public class RootController {
         modelAndView.addObject("postCount", postService.countPostForUnm(userNickname));
         modelAndView.addObject("userNickname", userNickname);
         modelAndView.addObject("visitedUser", visitedUser);
-        modelAndView.setViewName("root/unm");
+        modelAndView.setViewName("root/profile");
         return modelAndView;
     }
 

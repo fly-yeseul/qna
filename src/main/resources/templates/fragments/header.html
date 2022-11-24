@@ -33,9 +33,8 @@
                 </li>
                 <li class="item">
                     <a class="link"
-                       th:href="@{/user/my}"
+                       th:href="@{'/' + ${userEntity.getNickname()}}"
                        th:if="${userEntity != null}">
-                        <img alt="my-page" th:src="@{'/resources/images/userimage.png'}" th:if="${userEntity.getProfile() == null}">
                         <img alt="my-page" th:src="@{'/user/profile' (uid=${userEntity.getNickname()})}" th:if="${userEntity.getProfile() != null}">
                     </a>
                 </li>

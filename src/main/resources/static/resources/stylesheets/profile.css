@@ -1,0 +1,119 @@
+
+
+body {
+}
+
+body > .user-info{
+    width: 975px;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    margin: 2rem;
+}
+
+body > .user-info > .user-photo {
+    width: 20rem;
+    align-items: center;
+    margin-top: 30px;
+    justify-content: center;
+}
+
+body > .user-info > .user-photo > img {
+    width: 150px;
+    border-radius: 100%;
+    margin-left: 5rem;
+    margin-right: 5rem;
+}
+
+body > .user-info > .user-letters {
+
+    height: 272px;
+    padding: 0 2rem 0 2rem;
+}
+
+body > .user-info > .user-letters > .user-summary {
+    margin-bottom: 2rem;
+}
+
+body > .user-info > .user-letters > .user-summary > .user-nickname {
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+body > .user-info > .user-letters > .user-summary > .edit-profile {
+    border: 0.0625rem solid rgb(225, 225, 225);
+    border-radius: 0.25rem;
+    color: #262626;
+    font-weight: 500;
+    margin-left: 1rem;
+    padding: 0.25rem 0.75rem 0.25rem 0.75rem;
+}
+
+body > .user-info > .user-letters  > .user-count {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1.5rem;
+}
+
+body > .user-info > .user-letters  > .user-count > .counts {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-right: 2rem;
+}
+
+body > .user-info > .user-letters  > .user-count > .counts > .number{
+    font-weight: 600;
+}
+
+body > .user-info > .user-letters > .user-detail {
+    display: flex;
+    flex-direction: column;
+}
+
+body > .user-info > .user-letters > .user-detail > .user-name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+body > .user-info > .user-letters > .user-detail > .user-intro {
+    margin-right: 3rem;
+}
+
+body > .line {
+    width: var(--content-max-width);
+    border-bottom: 0.0625rem solid rgb(225, 225, 225);
+}
+
+body > .user-posts {
+    width: var(--content-max-width);
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+body > .user-posts > .posts {
+    width: 20rem;
+    height: 20rem;
+    justify-content: center;
+    align-items: center;
+}
+
+body > .user-posts > .posts > a {
+    width: 19rem;
+    height: 19rem;
+    overflow: hidden;
+    display: flex;
+    background-color: #ffffff;
+    margin-left: 0.5rem;
+    align-items: center;
+}
+
+body > .user-posts > .posts > a > img {
+    width: 19rem;
+    align: center;
+}
+
+
+

@@ -26,7 +26,6 @@
                   th:with="dt = ${#dates.createNow()}"
                   method="post">
                 <div class="user-info">
-<!--                    TODO user/my>user/usernickname으로 수정하기-->
                     <a th:href="@{'/' + ${post.getUserNickname()}}">
                         <img alt="my-page" th:src="@{'/user/profile' (uid=${post.getUserNickname()})}" th:if="${post.getProfile() != null}">
                         <span class="user-name" th:text="${post.getUserNickname()}"></span>
@@ -77,16 +76,15 @@
     <aside class="right">
         <div class="user-info">
             <div class="img">
-                <a class="user-image" th:href="@{/user/my}">
-                    <img alt="User-Image" th:src="@{/resources/images/userimage.png}" th:if="${userEntity.getProfile() == null}">
+                <a class="user-image" th:href="@{'/' + ${userEntity.getNickname()}}">
                     <img alt="my-page" th:src="@{'/user/profile' (uid=${userEntity.getNickname()})}" th:if="${userEntity.getProfile() != null}">
                 </a>
             </div>
             <div class="names">
-                <a th:href="@{/user/my}">
+                <a th:href="@{'/' + ${userEntity.getNickname()}}">
                     <span class="user-nickname" th:text="${userEntity.getNickname()}"></span>
                 </a>
-                <span class="user-name" th:text="${userEntity.getNickname()}"></span>
+                <span class="user-name" th:text="${userEntity.getName()}"></span>
             </div>
 
         </div>

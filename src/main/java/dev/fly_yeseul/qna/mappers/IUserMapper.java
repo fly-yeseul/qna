@@ -34,6 +34,8 @@ public interface IUserMapper {
 
     int updateProfilePhoto(UserEntity userEntity);
 
+    int updateUserInfo(UserEntity userEntity);
+
     UserEntity[] selectProfile();
 
     UserEntity selectProfileByPostIndex();

@@ -106,50 +106,35 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "my", method = RequestMethod.GET)
-    public ModelAndView getMy(
-            ModelAndView modelAndView,
-            @RequestAttribute (value = "userEntity", required = false) UserEntity userEntity,
-            @RequestAttribute (value = "postEntity", required = false) PostEntity postEntity
-            ) {
-        PostEntity[] postEntities = this.postService.getPosts();
-        modelAndView.addObject("postEntities", postEntities);
-        modelAndView.addObject("userEntity", userEntity);
-        modelAndView.addObject("postCount", postService.countPosts(userEntity));
-        modelAndView.setViewName("user/my");
-        return modelAndView;
-    }
-
     @RequestMapping(value = "edit", method = RequestMethod.GET)
     public ModelAndView getEdit(
             ModelAndView modelAndView,
             @RequestAttribute (value = "userEntity", required = false) UserEntity userEntity,
             @RequestParam (value = "pid", required = false) String email
     ) {
-//        modelAndView.addObject("userEntity", userEntity);
         EditVo editVo = new EditVo();
         editVo.setEmail(email);
-        this.userService.getUser(userEntity.getEmail());
-        modelAndView.addObject("editVo", editVo);
+        modelAndView.addObject("userEntity", userEntity);
         modelAndView.setViewName("user/edit");
         return modelAndView;
     }
 
     @RequestMapping(value = "edit", method = RequestMethod.POST)
     public ModelAndView postEdit(
-            HttpServletResponse response,
             ModelAndView modelAndView,
             @RequestAttribute (value = "userEntity", required = false) UserEntity userEntity,
-            @RequestParam(value = "pid", required = false) String email,
             @RequestParam(value = "name", required = true) String name,
             @RequestParam(value = "nickname", required = true) String nickname,
             @RequestParam(value = "intro", required = false) String intro,
             EditVo editVo
             ) throws IOException {
-        userEntity.setEmail(email);
-        this.userService.modifyProfilePhoto(editVo);
+        editVo.setEmail(userEntity.getEmail());
+        editVo.setName(name);
+        editVo.setNickname(nickname);
+        editVo.setIntro(intro.replace("\r\n", "<br>"));
+        this.userService.modifyUserInfo(editVo);
         modelAndView.addObject("editVo", editVo);
-        modelAndView.setViewName("redirect:/user/edit");
+        modelAndView.setViewName("/user/edit");
         return modelAndView;
     }
 
@@ -173,11 +158,13 @@ public class UserController {
             return modelAndView;
         }
         editVo.setResult(null);
+        editVo.setNickname(userEntity.getNickname());
         editVo.setProfile(profile.getBytes());
         this.userService.modifyProfilePhoto(editVo);
+        modelAndView.addObject("userEntity", userEntity);
 
         if(editVo.getResult() == EditResult.SUCCESS) {
-            modelAndView.setViewName("redirect:/user/edit");
+            modelAndView.setViewName("/user/edit");
         } else {
             modelAndView.setViewName("user/edit-profile");
         }

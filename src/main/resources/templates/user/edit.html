@@ -34,8 +34,7 @@
     <div class="edit-field">
 
         <div class="edit-profilePhoto">
-            <img alt="profile-photo" th:src="@{/resources/images/userimage.png}" th:if="${userEntity.getProfile() == null}">
-            <img alt="my-page" th:src="@{'/user/profile' (pid=${userEntity.getEmail()})}" th:if="${userEntity.getProfile() != null}">
+            <img alt="my-page" th:src="@{'/user/profile' (pid=${userEntity.getNickname()})}" th:if="${userEntity.getProfile() != null}">
             <div class="user-info">
                 <span class="user-nickname" th:text="${userEntity.getNickname()}"></span>
                 <a class="button edit" th:href="@{/user/edit-profile}"> 프로필 사진 바꾸기 </a>

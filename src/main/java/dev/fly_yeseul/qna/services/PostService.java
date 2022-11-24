@@ -32,22 +32,6 @@ public class PostService {
     }
 
 
-
-    public void postPhoto(
-            MultipartFile multipartFile
-    ) throws IOException {
-//        String id = String.format("%s%f%f",
-//                new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date()),
-//                Math.random(),
-//                Math.random());
-//        id = CryptoUtil.hashSha512(id);
-        PostEntity postEntity = new PostEntity(multipartFile.getBytes());
-    }
-
-//    public PostEntity getDetail(int postIndex) {
-//       return this.postMapper.selectPostByIndex();
-//    }
-
     public void getPoster(PostDto postDto) {
         PostEntity postEntity = this.postMapper.selectPostByIndex(postDto.getIndex());
         postDto.setIndex(postEntity.getIndex());
